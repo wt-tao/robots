@@ -1,0 +1,240 @@
+/* pages/recharge-balance/recharge.wxss */
+/* 账户余额、积分规则、充值记录 */
+.user{
+  width:100%;
+  height:300rpx;
+  text-align: center;
+  background: #18bc9a;
+}
+.user-detail{
+  width:94%;
+  margin-left:3%;
+  padding-top:8rpx;
+ justify-content: space-between;
+
+}
+.user-detail>view{
+  width:25%;
+  align-items:center;
+}
+.user-coupon{
+  font-size:11.5pt;
+  height:35rpx;
+  line-height: 35rpx;
+  color:#fff;
+  padding-left:10rpx;
+  padding-right:10rpx;
+}
+.user-coupon1{
+  font-size:9pt;
+  height:35rpx;
+  line-height: 35rpx;
+  color:#fff;
+  padding-left:10rpx;
+  padding-right:10rpx;
+}
+.coupon-num{
+  height:45rpx;
+  line-height:45rpx;
+  color:#fff;
+  font-size:12pt;
+  font-weight:900;
+}
+.question{
+  border:1px solid #fff;
+  border-radius:50%;
+  font-size:6pt;
+  height:35rpx;
+}
+.money-num{
+  font-size: 40pt;
+ height:120rpx;
+  line-height:120rpx;
+}
+.money-unit{
+  font-size: 14pt;
+}
+.user-detail1{
+  width:100%;
+  margin-left:0;
+  padding-top:8rpx;
+  padding-bottom:8rpx;
+ justify-content: space-between;
+
+}
+.section-img{
+  width:18%;
+  height:30rpx;
+}
+.section-img1{
+  width:10%;
+  height:25rpx;
+}
+.bg-color{
+  background:#16a98a;
+}
+
+/* 充值选项金额：50、100、200 */
+.third{
+  padding-top:30rpx;
+  background-color: #fff;
+}
+.list{
+  widows: 100%;
+  /* height: 150rpx; */
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  font-size:34rpx;
+  color:#18bc9a;
+  
+}
+.list_com{
+  width: 45%;
+  margin-top: 20rpx;
+  margin-left: 2.5%;
+  border-radius:18rpx;
+  line-height: 95rpx; 
+  height: 150rpx;
+  border: 3rpx solid #18bc9a;
+}
+
+.award-self{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding-bottom:40rpx;
+
+}
+ .award{
+  color:#18bc9a;
+  width:45%;
+  font-size:14px;
+  border-radius:18rpx;
+  text-align: center;
+  padding:30rpx 0;
+  border:3rpx solid #18bc9a;
+}
+.award-self .award .award-type{
+  font-size:14pt;
+}
+.award-self .award .award-money{
+  font-size:12pt;
+}
+.award-self .award-checked{
+  color:#fff;
+  background:#18bc9a;
+  border:3rpx solid #e9f0ee;
+}
+.checked{
+  color:#fff;
+  background:#18bc9a;
+  border:3rpx solid #e9f0ee;
+}
+/* 手动输入金额 */
+.border{
+  border:1px solid #a0a0a0;
+  align-items:center;
+  padding:15rpx 0;
+}
+input{
+  /* width:50%; */
+  text-align:center;
+}
+.placeholder{
+  color:#a0a0a0;
+  text-align:right;
+}
+.input-unit{
+  color:#a0a0a0;
+  font-size:9pt;
+}
+.money-info{
+  color:#b5b5b5;
+  font-size:9pt;
+  padding:5rpx 0;
+}
+
+/* 立即充值 */
+.btn-control{
+  width:100%;
+  text-align: center;
+  height:165rpx;
+  background: #fff;
+  padding-top:42.5rpx;
+  
+}
+.btn{
+  font-size: 17pt;
+  width:70%;
+  height:80rpx;
+  line-height: 80rpx;
+  /* color:#555; */
+  font-weight:900;
+  background:#bbbbbb;
+}
+.btn-bgcolor{
+  background:linear-gradient(to bottom,#82eed7,#14b48e);
+}
+/* 弹出框 */
+
+.modal-mask {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  opacity: 0.5;
+  overflow: hidden;
+  z-index: 9000;
+  color: #fff;
+}
+
+.modal-dialog {
+  width:580rpx;
+  overflow: hidden;
+  position: fixed;
+  top: 48%;
+  left: 0;
+  z-index: 9999;
+  background: #fff;
+  margin: -180rpx 85rpx;
+  border-radius: 30rpx;
+}
+
+.modal-title {
+  padding:15rpx 0 0 15rpx;
+  font-size:12pt;
+  font-weight:bold;
+  text-align: left;
+}
+
+.modal-content {
+  padding:15rpx 15rpx 20rpx 15rpx;
+  font-size:12pt;
+  font-weight:bold;
+}
+.modal-content-line{
+  justify-content:space-between;
+  margin-bottom:10rpx;
+}
+.modal-content-title{
+  width:40%;
+}
+.modal-footer {
+  display: flex;
+  align-items: center;
+  height: 86rpx;
+  line-height: 86rpx;
+}
+.btn-width{
+  /* color:#555; */
+  /* margin-top:40rpx; */
+  background:linear-gradient(to bottom,#82eed7,#14b48e);
+  width:35%;
+  font-size:13pt;
+  font-weight:500;
+  height:60rpx;
+  line-height: 60rpx;
+}

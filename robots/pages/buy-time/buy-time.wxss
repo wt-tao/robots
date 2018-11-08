@@ -1,0 +1,319 @@
+/* pages/buy-time/buy-time.wxss */
+/* 广告轮播 */
+.banner {
+  height: 300rpx;
+}
+.banner navigator {
+  font-size: 0;
+  position: relative;
+  height: 100%;
+}
+.banner .slide-image {
+  width: 100%;
+  height: 100%;
+}
+.banner .slide-title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 20rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 11pt;
+  display: none;
+}
+/* 订单编号 */
+.section{
+  margin-bottom:10rpx;
+}
+.section-width{
+  width:50%;
+  padding-top:15rpx;
+  padding-bottom:20rpx;
+}
+.section-left{
+  padding-left:10rpx;
+}
+.order-content{
+  height:25rpx;
+  line-height:25rpx;
+  font-size:9pt;
+  padding-left:8rpx;
+}
+/* 购买时长 */
+.picker{
+ width:94%; 
+ margin-left:3%;
+ height: 50px;
+ text-align: center;
+}
+.radius-left{
+  border-top-left-radius:30rpx;
+  border-bottom-left-radius:30rpx;
+}
+.radius-right{
+  border-top-right-radius:30rpx;
+  border-bottom-right-radius:30rpx;
+}
+.indicator-class{
+  height: 50px;
+  /* background:#fff; */
+}
+.text-align{
+  text-align: center
+}
+.select-style{
+  line-height: 50px;
+  color:#0d201e;
+  background:#fff;
+  font-weight: bold;
+}
+.select-num{
+  color: #d96b6a;
+  font-size:18pt;
+  font-weight: bold;
+}
+.num-control{
+  width:94%; 
+ margin-left:3%;
+ text-align: center;
+  align-content: justify;
+  /* background:#f0f0f0; */
+  font-size:15pt;
+  color:#a0a0a0;
+  height: 35px;
+}
+.num0-0{
+  line-height:35px;
+  width:60%;
+}
+.num0-1{
+  line-height:35px;
+  width:20%;
+}
+.total-control{
+  width:94%; 
+  margin-left:3%;
+  margin-top:15px;
+  justify-content:space-between;
+  align-items:baseline;
+}
+.price{
+  color:#d96b6a;
+  font-size:18pt;
+  font-weight: bold;
+}
+.mini{
+  font-size:13pt;
+}
+.count-balance{
+  font-size:10pt;
+}
+.balance-color{
+  color:#80ebd3;
+}
+.free-rule{
+  font-size:10pt;
+  color:#459aea;
+}
+.question{
+  border:1px solid #459aea;
+  border-radius:50%;
+  font-size:6pt;
+}
+/* 优惠券 */
+.items-center{
+  align-items:center;
+  width:94%; 
+  margin-left:3%;
+  margin-top:15px;
+}
+.coupon-info{
+  color:#a0a0a0;
+  padding-left:5%;
+  font-weight: bold;
+}
+.coupon-left{
+  color:#fff;
+  /* background:#d76d6d; */
+  width:28%;
+  text-align: center;
+}
+.left-price{
+  font-size:13pt;
+  font-weight: bold;
+  padding:6rpx 0 0 0;
+}
+.left-id{
+  font-size:8pt;
+  padding:6rpx 0 15rpx 0;
+}
+/* 确认按钮 */
+.btn-control{
+  width:100%;
+  text-align: center;
+  height:420rpx;
+  background: #fff;
+  padding-top:42.5rpx;
+  
+}
+.btn{
+  font-size: 17pt;
+  width:70%;
+  height:80rpx;
+  line-height: 80rpx;
+  /* color:#555; */
+  font-weight: bold;
+  background:#bbbbbb; 
+}
+.btn-bgcolor{
+  background:linear-gradient(to bottom,#82eed7,#14b48e);
+}
+/* 弹出框 */
+
+.modal-mask {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  opacity: 0.5;
+  overflow: hidden;
+  z-index: 9000;
+  color: #fff;
+}
+
+.modal-dialog {
+  width:440rpx;
+  overflow: hidden;
+  position: fixed;
+  top: 48%;
+  left: 0;
+  z-index: 9999;
+  background: #fff;
+  margin: -180rpx 145rpx;
+  border-radius: 30rpx;
+  
+}
+
+.modal-title {
+  padding:15rpx 0 0 15rpx;
+  font-size:9pt;
+  text-align: left;
+}
+
+.modal-content {
+  padding:25rpx 15rpx 15rpx 15rpx;
+  font-size:12pt;
+  font-weight:bold;
+  letter-spacing:3rpx;
+}
+.modal-content-line{
+  justify-content:space-between;
+  margin-bottom:10rpx;
+  /* text-align: center; */
+}
+.modal-content-title{
+  width:90%;
+  /* text-align: center; */
+}
+.modal-footer {
+  display: flex;
+  align-items: center;
+  height: 92rpx;
+  line-height: 92rpx;
+  padding:15rpx 0 15rpx 15rpx;
+  border-top:1px solid #f0f0f0;
+  font-size:12pt;
+  font-weight:bold;
+  letter-spacing:3rpx;
+}
+.btn-width{
+  /* color:#555; */
+  /* margin-top:40rpx; */
+  background:linear-gradient(to bottom,#82eed7,#14b48e);
+  width:35%;
+  font-size:13pt;
+  font-weight:500;
+  height:60rpx;
+  line-height: 60rpx;
+}
+/* 支付图标 */
+.pay-img{
+  width:22%;
+  height:90rpx;
+  margin-right:5%;
+  
+}
+
+/* 支付成功弹出框 */
+.modal-mask1 {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  opacity: 0.5;
+  overflow: hidden;
+  z-index: 9000;
+  color: #fff;
+}
+
+.modal-dialog1 {
+  width:580rpx;
+  overflow: hidden;
+  position: fixed;
+  top: 48%;
+  left: 0;
+  z-index: 10000;
+  background: #fff;
+  margin: -180rpx 85rpx;
+  border-radius: 30rpx;
+}
+
+.modal-title1 {
+  padding:15rpx 0 0 15rpx;
+  font-size:12pt;
+  font-weight:bold;
+  text-align: left;
+}
+
+.modal-content1 {
+  padding:15rpx 15rpx 20rpx 15rpx;
+  font-size:12pt;
+  font-weight:bold;
+}
+.modal-content-line1{
+  justify-content:space-between;
+  margin-bottom:10rpx;
+}
+.modal-content-title1{
+  width:60%;
+}
+.modal-footer1 {
+  display: flex;
+  align-items: center;
+  height: 86rpx;
+  line-height: 86rpx;
+}
+.btn-width1{
+  /* color:#555; */
+  /* margin-top:40rpx; */
+  background:linear-gradient(to bottom,#82eed7,#14b48e);
+  width:35%;
+  font-size:13pt;
+  font-weight:500;
+  height:60rpx;
+  line-height: 60rpx;
+}
+/* 优惠券 */
+.coupon-img{
+  width:100%;
+  height:150rpx;
+}

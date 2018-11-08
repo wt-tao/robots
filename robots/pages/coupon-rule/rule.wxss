@@ -1,0 +1,4 @@
+/* pages/coupon-rule/rule.wxss */
+page{
+  background: #f0f0f0;
+}

@@ -1,0 +1,4 @@
+/* pages/help-center/help-center.wxss */
+page{
+  background:#f0f0f0;
+}

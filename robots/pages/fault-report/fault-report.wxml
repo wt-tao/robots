@@ -1,0 +1,40 @@
+<!--pages/fault-report/fault-report.wxml-->
+<view class='faults'>
+        <view class='flex order'>
+                <input class='order-id' placeholder='请扫描设备二维码或输入编号' placeholder-class='placeholder' bindinput='card' value='{{sb.code}}'>
+                </input>
+                <image src='/images/fault-logo.png' class='section-img' bindtap='ewm'></image>
+        </view>
+        <view class='faults-details'>
+                     <textarea class='faults-content' type='text'  cols="10" rows="5" placeholder-class='placeholder1' bindinput='fault' maxlength='200' placeholder='请描述设备详细故障信息'>
+                        
+                     </textarea>
+               <view class='flex faults-footer'>
+                <image src='/images/fault-detail.png' class='section-img1' bindtap='img'></image>
+                <block wx:for='{{img_}}'> 
+                  <view class='div_list' wx:if='{{img}}'>  
+                      <image  src='{{img_[index]}}' style='width:100%;height:100%' ></image>           
+                  </view>
+                </block> 
+                <view class='letters-num'>{{num}}/200</view>
+              </view>
+        </view>
+
+</view> 
+        <!-- 提交按钮 -->
+        <view class='btn-control'>
+              <button class='btn' bindtap='showDialogBtn1'>提 交</button>
+        </view>
+      <view class="modal-mask" bindtap="hideModal1" catchtouchmove="preventTouchMove" wx:if="{{showModal1}}">
+        </view>
+        <view class="modal-dialog" wx:if="{{showModal1}}">
+              <view class="modal-title"></view>
+              <view class="modal-content">
+                  <view class='flex modal-content-line'>
+                        <view class='modal-content-title'>我们会尽快联系工作人员处理,感谢您对我们工作的支持！</view>
+                  </view>
+              </view>
+              <view class="modal-footer">
+                <button class="btn-width" bindtap="onConfirm1" data-status="">确定</button>
+              </view>
+      </view>

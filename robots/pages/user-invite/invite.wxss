@@ -1,0 +1,67 @@
+/* pages/user-invite/invite.wxss */
+page{
+  background: #f0f0f0;
+}
+.container{
+  background:#fff;
+  width:94%;
+  margin-left:3%;
+  margin-top:40rpx;
+  border-radius:15rpx;
+  
+}
+.total-control{
+  width:94%; 
+  margin-left:3%;
+  margin-top:10px;
+  justify-content:space-between;
+  align-items:baseline;
+  padding:15rpx 0;
+}
+/* 到账银行 */
+.total-control1{
+  width:94%;
+  margin-left:3%;
+  height:100rpx;
+  line-height:100rpx;
+  padding-left:3%;
+  margin-top:10px;
+  justify-content:space-between;
+  background: #b5b5b5;
+  align-items: center;
+}
+.bank-title{
+  width:90%;
+  font-size:10pt;
+  height:100rpx;
+  line-height:100rpx;
+}
+.section-img{
+  width:9%;
+  height:60rpx;
+  padding:5rpx 1rpx;
+  /* border-radius:50%; */
+}
+/* 脚注 */
+.footer{
+ width:90%; 
+margin-left:5%;
+}
+.free-rule{
+  font-size:10pt;
+  color:#459aea;
+}
+/* 二维码 */
+.invite-code{
+  width:650rpx;
+  height: 650rpx;
+}
+.logo-img{
+  width:80rpx;
+  height:80rpx;
+  padding:10rpx;
+  border-radius: 50%;
+  border:2rpx solid #b5b5b5;
+}
+
+

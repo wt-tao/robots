@@ -1,0 +1,69 @@
+<!--pages/recharge-balance/recharge.wxml-->
+<view>
+      <!-- 账户余额、积分规则、充值记录 -->
+      <view class='user'>
+              <view class='flex user-detail'>
+                    <view class='flex '>
+                          <view class='user-coupon'>剩余积分</view>
+                    </view>
+                    <view bindtap='toJump1'>
+                          <text class='user-coupon1 flex' decode='true'>
+                            <text decode='true' class='question'>&ensp;?&ensp;</text> 积分明细
+                          </text>
+                    </view>
+              </view> 
+              <view class='flex user-detail'>
+                    <view class='flex ' style='width:60%;padding-top:40rpx;padding-bottom:40rpx;'>
+                          <view class='user-coupon money-num'>{{user_ye.jifen}}<text class='money-unit'></text>
+                          </view>
+                    </view>
+              </view> 
+              <view class='flex user-detail user-detail1 bg-color'>
+                    <view class='flex '>
+                    </view>
+                    
+                    <view class='flex' bindtap='toJump1'>
+                    <!-- toJump -->
+                          <image src='/images/coupon-record.png' class='section-img'></image>
+                          <view class='user-coupon1'>兑换记录</view>
+                          <image src='/images/left-row.png' class='section-img1'></image>
+                    </view>
+                    
+                    
+              </view> 
+      </view>
+
+      <!-- 充值选项金额 -->
+      <view class='third'>
+      <view class='list'>
+          <view class='list_com {{item.id==ids?"checked":""}}'  wx:for='{{data}}'    data-money='{{item.price}}'  data-present='{{item.present}}'  id='{{item.id}}' bindtap='selectCoupon1'>
+             <view class='award_' style='margin-top:10rpx; '>{{item.price}}积分</view>
+              <view class='award_' style='margin-top:-50rpx;'>兑换{{item.present}}元</view>
+          </view>
+      </view>
+
+      </view>
+
+      <!-- 立即充值 -->
+        <view class='btn-control'>
+              <button class='btn {{selectMoney?"btn-bgcolor":""}}' bindtap="showDialogBtn">立即兑换</button>
+        </view>
+      <!-- 弹出框 -->
+        <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}">
+        </view>
+        <view class="modal-dialog" wx:if="{{showModal}}">
+              <view class="modal-title">充值成功！</view>
+              <view class="modal-content">
+                  <view class='flex modal-content-line'>
+                        <view class='modal-content-title'>本次兑换：{{moeny}}积分</view>
+                        <view class='modal-content-title'>赠送金额：0元</view>
+                  </view>
+                  <view class='flex modal-content-line'>
+                        <view class='modal-content-title'>获得积分：0</view>
+                  </view>
+              </view>
+              <view class="modal-footer">
+                <button class="btn-width" bindtap="onConfirm" data-status="confirm">确定</button>
+              </view>
+        </view>
+</view>

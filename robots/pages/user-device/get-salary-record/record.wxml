@@ -1,0 +1,46 @@
+<!--pages/recharge-record/record.wxml-->
+<view>
+  <view class='section' wx:for='{{data}}'>
+      <view class='flex-items-justify'>
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>{{index}}</view>
+              </view> 
+      </view>
+      <block wx:for='{{data[index]}}'>
+      <view class='flex-items-justify border-top' bindtap='scanSalaryRecord0' id='{{item.id}}'>
+              <view class='section-width flex section-left'>
+                    <view class='order-content'>提现时间：{{item.time}}</view>
+              </view> 
+              <view class='section-width flex'>
+                    <view class='order-content'>提现金额：{{item.money}}元</view>
+              </view> 
+      </view>
+      <!-- 提现记录详情 -->
+      <view wx:if='{{item.id==ids}}'>
+          <view class='flex-items-justify border-top'>
+                  <view class='section-width flex section-left'>
+                        <view class='order-content'>提现时间：{{item.time}}</view>
+                  </view> 
+                  <view class='section-width flex'>
+                        <view class='order-content'>提现账户：银行账户</view>
+                  </view> 
+          </view>
+          <view class='flex-items-justify'>
+                  <view class='section-width flex section-left'>
+                        <view class='order-content'>提现金额:{{item.money}}元</view>
+                  </view> 
+                  <view class='section-width flex'>
+                        <view class='order-content'>剩余佣金：{{item.yue}}元</view>
+                  </view> 
+          </view>
+      </view>
+      
+     </block>
+      
+  </view>
+
+  <view class='annotation'>
+    注：因系统原因，查询当天结果可能存在延时
+  </view>
+</view>
+  

@@ -1,0 +1,102 @@
+/* pages/contact-service/contact-service.wxss */
+/* 拨打电话 */
+.btn-control{
+  width:100%;
+  text-align: center;
+  height:165rpx;
+  background: #fff;
+  padding-top:42.5rpx;
+  border-top:1rpx solid #f0f0f0;
+}
+.phone-num{
+    width:100%;
+    font-size: 17pt;
+    text-align: center;
+    height:120rpx;
+    line-height:120rpx;
+}
+.btn{
+  font-size: 16pt;
+  width:70%;
+  height:80rpx;
+  line-height: 80rpx;
+  /* color:#555; */
+  /* font-weight: bold; */
+  background:linear-gradient(to bottom,#82eed7,#14b48e);
+}
+.footer-info{
+  /* width:100%;
+  padding-left:3%; */
+  text-align: left;
+  font-size:9pt;
+}
+.text-left{
+    text-align:left;
+    padding-left:3%;
+    height:40rpx;
+    line-height: 40rpx;
+}
+
+/* 弹出框 */
+.modal-mask {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  opacity: 0.5;
+  overflow: hidden;
+  z-index: 9000;
+  color: #fff;
+}
+
+.modal-dialog {
+  width:580rpx;
+  overflow: hidden;
+  position: fixed;
+  top: 30%;
+  left: 0;
+  z-index: 9999;
+  background: #fff;
+  margin: -180rpx 85rpx;
+  border-radius: 30rpx;
+}
+
+.modal-title {
+  padding:15rpx 0 0 15rpx;
+  font-size:12pt;
+  font-weight:bold;
+  text-align: left;
+}
+
+.modal-content {
+  padding:15rpx 15rpx 20rpx 15rpx;
+  font-size:12pt;
+  font-weight:bold;
+}
+.modal-content-line{
+  justify-content:space-between;
+  margin-bottom:10rpx;
+  text-align: center;
+}
+.modal-content-title{
+  width:90%;
+  text-align: center;
+}
+.modal-footer {
+  display: flex;
+  align-items: center;
+  height: 86rpx;
+  line-height: 86rpx;
+}
+.btn-width{
+  /* color:#555; */
+  /* margin-top:40rpx; */
+  background:linear-gradient(to bottom,#82eed7,#14b48e);
+  width:35%;
+  font-size:13pt;
+  font-weight:500;
+  height:60rpx;
+  line-height: 60rpx;
+}

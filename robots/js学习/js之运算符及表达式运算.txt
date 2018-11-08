@@ -1,0 +1,190 @@
+1、delete运算符（删除指定对象的属性、数组元素或变量）：清除变量所占空间，不是清理值
+	eg:
+	var a ={
+		x:1,
+		y:2
+	}
+	alert(a.x)				//1
+	delete a.x
+	alert(a.x)				//undefined
+	
+	eg:
+	var a ={
+		x:1,
+		y:2
+	}
+	alert(delete a.x)		//返回true，说明删除成功 （找不到成员时也返回true）
+	
+	不是所有对象成员或变量都可以被删除，如某些内置对象的对象成员，使用var 语句声明的变量也是不允许删除的，
+	页面关闭时自动清除
+	
+	a = 1				//初始化变量，没有使用var
+	alert(delete a)		//true 	删除成功
+	
+	var b = 1				//使用var初始化变量
+	alert(delete b)		//false 	不允许删除
+	alert(delete Object.constructor)
+	//true 		说明内部成员可以被删除
+	alert(delete Object.valueOf())
+	//返回错误，说明某些内部成员不可以被删除
+	
+	若删除不存在的对象成员，或者非对象成员，数组元素，变量，会返回true
+	所以使用delete运算符时。注意此问题，防止与成功操作混淆
+	
+	var a ={
+		x:1,
+		y:2
+	}
+	alert(delete a)		//false  不允许被删除
+	alert(delete a.z)	//true  不存在该属性
+	alert(delete Object)	//true  删除的属性或变量
+	alert(delete b)	//true  不存在该属性
+	
+	eg：
+	var a = [];
+	if('x' in a)		//若存在x 则删除
+		delete a['x'];
+	else				不存在想，则插入x，赋值为true
+		a['x'] = true;	
+	alert(a.x);		//true
+	if(delete a['x'])
+		a['x'] = false;		//更新元素x值为false
+	alert(a.x)			//false
+		
+2、中括号（数组下标）和点号运算符（读取对象属性）	
+		eg：
+		var a = [1,'x',true ,{}]
+		alert(a[1])			//x
+		alert(a['1'])		//x
+		
+			var a = {x:1,y:2};
+		alert(a["x"]);	//1
+
+	点号运算符可以存取对象属性值，比中括号灵活、方便  
+	因为右侧可指定属性的标识符，而不是属性名称的字符串或变量
+		eg：
+		var a = {x:1}
+		alert(a.x)	//1
+		a.x = 2 
+		alert(a.x)	//2
+		
+		var b = "x"		//将属性x的标识符名作为字符串存储在变量中
+		var a = {x:1}
+		alert(a[b])	//1
+		alert(a.b)	//undefined
+	
+3、小括号运算符（函数调用，与new类似 new是创建示例对象）还可以逻辑分隔，语法标识等，优先等级最高
+		function a(){  	//用来包形参，只是一个语法形式，不是调用
+			alert('hello')
+		}
+		a	//直接引用函数名 没有反应
+		a()		//hello 没有传参
+		a(1,'string',{},true)  //hello  传递4个不同类型参数
+		
+		
+4、条件运算符（条件语句的简单运算形式 条件结构转化为条件表达式，为的在表达式中快速实现条件分支）
+		三元运算（？）布尔值？任意（为true执行）：任意（为false执行）a?x:y
+		
+5、逗号运算符（连续运算，二元运算符）：执行多重计算操作
+		常用多个变量声明
+			var a = 1,b = 2,c = 3
+		a = (b = 1,c = 2)
+		alert(a)		//2
+		alert(b)		//1
+		alert(c)		//2
+		
+		for(a = 1,b = 10, c = 100;++c, a < b;a++,c--){
+			alert(a*c)
+		}
+		
+6、void运算符：可以在任何运算符之前  返回未定义的值 undefined
+	可以作为方法使用
+		
+	var a = b = c = 2;
+	d = void(a -= (b *= (c += 5)))  //执行void
+	alert(a)		//-12
+	alert(b)		//14
+	alert(c)		//7
+	alert(d)		//undefined
+	
+	alert(void 2 - 1) 	 //NaN  ==  alert((void 2) - 1)
+	alert(void (2 - 1)) 	 //undefined
+		
+7、使用表达式（使用运算符 注意优先级）
+		有些运算符会对自身产生影响，会改变自身值
+		  var a = 1
+		  a = (a++)+(++a)-(a++)-(++a)  
+	//==  a = 2 + 3 - 4 -5
+		  alert(a)		//-4
+		
+8、连续运算  
+	三元运算
+	switch
+		
+9、命令转为表达式（本质求值运算 ）
+		命令（条件结构  循环结构）
+		可以使用逻辑运算符来转换
+		var a = ((a == 1) && alert(1)||    若a等于1，则提示1
+		(a == 2) && alert(2)||
+		(a == 3) && alert(3)||
+		(a == 4) && alert(4)||
+		alert(undefined))				//否则提示undefined
+		
+		还可以使用三元转换
+		var a = ((a == 1) ? alert(1):    若a等于1，则提示1
+		(a == 2) ? alert(2): 
+		(a == 3) ? alert(3): 
+		(a == 4) ? alert(4): 
+		alert(undefined))				//否则提示undefined
+		
+		对于循环，一般使用递归函数调用
+		
+		for(var i = 1;i < 100;i++){
+			document.write(i)
+		}
+		
+		var i = i;		//声明变量
+		(function(){		//定义匿名函数
+			document.write(i);	//可执行语句
+			(++i < 100) && arguments.callee();   // arguments.callee()调用匿名函数
+			//如果递增后的变量i小于100，则执行递归运算
+		})()			//调用函数
+		
+		
+10、表达式中的函数	
+	逻辑复杂的分支结构中包含函数结构体，以判断两种表达式的大小，并输出提示信息，
+	代码是在无命令语句的情况下完成的任务，与命令式语言风格迥然不同
+	((function f(x,y)){
+		return (x + y) * (x + y)
+		
+	})(25,36) >
+	(function f(x,y)){
+		return x * y + x + y
+	})(25,36)) ?
+	alert("(x + y)^2"):alert("x ^2 + y^2")
+	//(x + y)^2 
+	
+	下面使用函数封装复杂的循环结构，并让他直接参与到表达式中
+	alert((function(x,y){
+		var c = 0,a = []
+		for(var i = 0;i < x;i++){
+			for(var j = 0;j < y;j++){
+				a[c] = i.toString() + j.toString();
+				document.write(++c + "");
+			}
+			document.write("<br />");
+		}
+		return a;
+	}
+	)(10,10))
+	
+	连续运算的表达式存在一定的调试风险，没有上面代码的提示，
+	很难简单看明白下面一行表达式的逻辑和语义
+		alert((function(x,y){var c = 0,a = []；for(var i = 0;i < x;i++){
+		for(var j = 0;j < y;j++){
+		a[c] = i.toString() + j.toString();document.write(++c + "");}document.write("<br />");
+		}return a;})(10,10))
+	
+		
+		
+		

@@ -1,0 +1,116 @@
+<!--pages/user-info/static-info/static.wxml-->
+<view>
+  <view class='section'>
+      <view class='flex'>
+              <view class='section-width flex section-left border-top'>
+                    <view class='order-date'>全部相关</view>
+              </view> 
+      </view>
+      <view class='flex border-top justify'>
+              <view class='section-width flex section-left'>
+                    <view class='order-content'>充值金额：{{money.cj}}元</view>
+              </view> 
+              <view class='section-width flex'>
+                    <view class='order-content'>已赠送：{{money.zs}}元</view>
+              </view> 
+      </view>
+      <view class='flex'>
+              <view class='section-width flex section-left'>
+                    <view class='order-content'>消费金额：{{money.xf}}元</view>
+              </view> 
+              <view class='section-width flex'>
+                    
+              </view> 
+      </view>
+      <view class='flex'>
+              <view class='section-width flex section-left'>
+                    <view class='order-content'>当前余额：{{money.yue}}元</view>
+              </view> 
+              <view class='section-width flex'>
+                    
+              </view> 
+      </view>
+      <view class='flex'>
+              <view class='section-width flex section-left'>
+                    <view class='order-content'><text decode='true'>佣&ensp;&ensp;&ensp;&ensp;金</text>：{{money.yj}}元</view>
+              </view> 
+              <view class='section-width flex'>
+                    <view class='order-content'>已提现：{{money.tx}}元</view>
+              </view> 
+      </view>
+      
+  </view>
+  <view class='section'>
+      <view class='flex'>
+              <view class='section-width flex section-left border-top'>
+                    <view class='order-date'>时间相关</view>
+              </view> 
+      </view>
+      
+      <view class='flex border-top'>
+              <view class='section-width flex section-left'>
+                    <view class='order-content'>使用日期：{{time.day}}天</view>
+              </view> 
+              <view class='section-width flex'>
+                    
+              </view> 
+      </view>
+      <view class='flex'>
+              <view class='section-width flex section-left'>
+                    <view class='order-content'>使用时长：{{time.time}}分钟</view>
+              </view> 
+              <view class='section-width flex'>
+                    
+              </view> 
+      </view>
+  </view>
+  <view class='section'>
+      <view class='flex'>
+              <view class='section-width flex section-left border-top'>
+                    <view class='order-date'>积分相关</view>
+              </view> 
+      </view>
+      
+      <view class='flex border-top'>
+              <view class='section-width flex section-left'>
+                    <view class='order-content'>历史积分：{{jifen.zjf}}</view>
+              </view> 
+              <view class='section-width flex'>
+                    <view class='order-content'>已兑换：{{jifen.dh}}元</view>
+              </view> 
+      </view>
+      <view class='flex'>
+              <view class='section-width flex section-left'>
+                    <view class='order-content'>当前积分：{{jifen.jf}}</view>
+              </view> 
+              <view class='section-width flex'>
+                    
+              </view> 
+      </view>
+  </view>
+  <view class='section'>
+      <view class='flex'>
+              <view class='section-width flex section-left border-top'>
+                    <view class='order-date'>优惠券</view>
+              </view> 
+      </view>
+      
+      <view class='flex border-top justify'>
+              <view class='section-width flex section-left'>
+                    <view class='order-content'>历史优惠：共{{coupon.ls}}张（共{{coupon.lsPrice}}元）</view>
+              </view> 
+              <view class='section-width flex'>
+                    <view class='order-content'>已使用：{{coupon.sy}}张（{{coupon.syPrice}}元）</view>
+              </view> 
+      </view>
+      <view class='flex'>
+              <view class='section-width flex section-left'>
+                    <view class='order-content'>当前优惠：{{coupon.dq}}张（共{{coupon.dqPrice}}元）</view>
+              </view> 
+              <view class='section-width flex'>
+                    
+              </view> 
+      </view>
+  </view>
+
+</view>   

@@ -1,0 +1,147 @@
+<!--pages/submit-order/submit-order.wxml-->
+<view>
+      <view class='section'>
+        <view class='flex'>
+                <view class='section-width flex section-left'>
+                      <view class='order-date'>设备编号:{{code}}</view>
+                </view> 
+                <view class='section-width flex section-left'>
+                      <view class='order-date'>{{storeTitle}}</view>
+                </view> 
+        </view>
+        <view >
+               <view class="after-navber">
+                  <view class="option-list">
+                      <!-- 使用时长 -->
+                      <view>
+                          <navigator class="option-item" url="">
+                              <view class="flex-row option-content">
+                                  <view class="flex-grow-1 flex-row">
+                                      <view class="flex-grow-0 flex-y-center">
+                                          <image class="option-icon" src="/images/order-time.png" />
+                                      </view>
+                                      <view class="flex-grow-1 flex-y-center">
+                                          使用时长：{{time}}分钟
+                                      </view>
+                                  </view>
+                                  <view class="flex-grow-0 flex-y-center" bindtap='renewSelect'>
+                                    <text class='renew-select'>重新选择</text> <image class="option-jisntou" src="/images/icon-jiantou-r.png" />
+                                  </view>
+                              </view>
+                          </navigator>
+                      </view>
+                      <!--支付金额 -->
+                      <view>
+                          <navigator  url="/pages/user-invite/invite">
+                              <view class="option-item">
+                                  <view class="flex-row option-content">
+                                      <view class="flex-grow-1 flex-row">
+                                          <view class="flex-grow-0 flex-y-center">
+                                              <image class="option-icon" src="/images/recharge.png" />
+                                          </view>
+                                          <view class="flex-grow-1 flex-y-center">
+                                              支付金额：{{price}}元
+                                          </view>
+                                      </view>
+                                      <view class="flex-grow-0 flex-y-center">
+                                          <!-- <image class="option-jisntou" src="/images/icon-jiantou-r.png" /> -->
+                                      </view>
+                                  </view>
+                              </view>
+                          </navigator>
+                      </view>
+                     
+                  </view>
+                </view>
+        </view>
+      </view>
+
+      <view class='section'>
+        <view >
+               <view class="after-navber">
+                  <view class="option-list">
+                      <view>
+                          <navigator class="option-item" >
+                              <view class="flex-row option-content">
+                                  <view class="flex-grow-1 flex-row">
+                                      <view class="flex-grow-0 flex-y-center">
+                                          <image class="option-icon" src="/images/order-pay.png" />
+                                      </view>
+                                      <view class="flex-grow-1 flex-y-center" style='font-size:10pt;'>
+                                          支付方式
+                                      </view>
+                                  </view>
+                                  <!-- <view class="flex-grow-0 flex-y-center" bindtap='showDialogBtn'> -->
+                                  <view class="flex-grow-0 flex-y-center" >
+                                    <text class='renew-select'>微信支付</text> <image class="option-jisntou" src="/images/icon-jiantou-r.png" />
+                                  </view>
+                              </view>
+                          </navigator>
+                      </view>
+                     
+                  </view>
+                </view>
+        </view>
+      </view>
+      <view class='section'>
+        <view >
+               <view class="after-navber">
+                  <view class="option-list">
+                      <view>
+                          <navigator class="option-item" url="/pages/coupon/coupon">
+                              <view class="flex-row option-content">
+                                  <view class="flex-grow-1 flex-row">
+                                      <view class="flex-grow-0 flex-y-center">
+                                          <image class="option-icon" src="/images/coupon.png" />
+                                      </view>
+                                      <view class="flex-grow-1 flex-y-center" style='font-size:10pt;'>
+                                          优惠券信息：用可用优惠券 X{{sum}}
+                                      </view>
+                                  </view>
+                                  <view class="flex-grow-0 flex-y-center">
+                                    <text class='renew-select'>查看全部</text> <image class="option-jisntou" src="/images/icon-jiantou-r.png" />
+                                  </view>
+                              </view>
+                          </navigator>
+                      </view>
+                     
+                  </view>
+                </view>
+        </view>
+      </view>
+      <view class='section'>
+        <image src='/images/coupon-used.png' class='coupon-used' wx:for='{{cou}}' bindtap='sec' id='{{item.id}}' data-price='{{item.cvalue}}'></image>
+      </view>
+</view>
+<!-- 底部 -->
+<view class='flex navigator'>
+      <view class='item'>已优惠 <text class=''><text class='price-unit'>￥</text>{{prc}}</text>
+       </view>
+       <view class='item'>共计 <text class='price'><text class='price-unit'>￥</text>{{sumPrice}}</text>
+       </view>
+       <view class='item' style='background: #14b48e;'><button class='submit' bindtap='submit'>提交订单</button>
+       </view>
+</view> 
+<!-- 支付方式弹出框 -->
+        <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}">
+        </view>
+        <view class="modal-dialog" wx:if="{{showModal}}">
+              <view class="modal-title">
+                      <view>设备编号：123456789</view>
+                      <view>使用时长：{{time/60}}小时</view>
+              </view>
+              <view class="modal-content">
+                  <view class='flex modal-content-line'>
+                        <view class='modal-content-title'>支付金额：<text class='price'>{{price}}</text> 元</view>
+                  </view>
+              </view>
+              <view class="modal-footer" bindtap='showDialogBtn1' id='0'>
+                        <image src='/images/weixin.png' class='pay-img'></image>
+                        <view>微信支付</view>
+              </view>
+              <view class="modal-footer" bindtap='showDialogBtn1' id='1'>
+                        <image src='/images/pay.png' class='pay-img'></image>
+                        <view>余额支付</view>
+              </view>
+        </view>
+

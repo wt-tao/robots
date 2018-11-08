@@ -1,0 +1,37 @@
+<!--pages/user-invite/invite.wxml-->
+<view class='container'>
+      <view class='flex total-control'>
+                <image class='invite-code'  src='/images/invite-code.png'></image>
+      </view>
+</view>
+<view class='flex total-control1'>
+        <image class='section-img'  src='/images/student-invite.png'></image>
+        <view class='bank-title'>
+        扫描二维码或应用分享给好友，即可领取优惠券
+        </view>
+        
+</view> 
+
+<view class='flex total-control footer'>
+                  <view>
+                        <text class='price'> </text> 
+                  </view>
+                 
+                 <text class='free-rule flex' decode='true' bindtap='toSalaryRecord'>查看规则</text>
+</view>
+<view class='container' style='background: #f0f0f0;'>
+      <view class='flex total-control' style='background: #f0f0f0;'>
+             <view>——————</view>
+             <view>分 享 到</view>
+             <view>——————</view>
+      </view>
+</view>
+<view class='container' style='background: #f0f0f0;'>
+      <view class='flex total-control' style='background: #f0f0f0;'>
+             <image class='logo-img'  src='/images/invite-QQ.png'></image>
+             <button open-type='share' plain='true' style='border:none'>
+              <image class='logo-img'  src='/images/invite-wx.png'></image>
+            </button>
+             <image class='logo-img'  src='/images/invite-xl.png'></image>
+      </view>
+</view>

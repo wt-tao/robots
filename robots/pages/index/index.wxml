@@ -1,0 +1,124 @@
+<!--index.wxml-->
+<view>
+      <!-- 广告轮播 -->
+      <swiper  class='banner ' autoplay="true" 
+        interval="5000" duration="300" indicator-dots="true" circular="true">
+          <block wx:for="{{index.banner}}" wx:key="item">
+            <swiper-item>
+              <navigator url="">
+                <image src="{{item.banner}}" class="slide-image" mode="aspectFill" />
+              </navigator>
+            </swiper-item>
+          </block>
+        </swiper>
+
+        <!-- 余额、扫码、充值、优惠券 -->
+        <view>
+            <view class='flex section-width'>
+                  <view class='section section-border-bottom' bindtap='toJump'>
+                        <image src='../../images/balance.png' class='section-img'></image>
+                        <view class='section-tag'>余额(<text class='section-tag-color'>{{index.userinfo.yue}}</text>)</view>
+                  </view> 
+                  <view class='section section-border-left section-border-bottom'  bindtap='ewm'>
+                        <!-- bindtap="showDialogBtn" -->
+                        <image src='../../images/sweep.png' class='section-img'></image>
+                        <view class='section-tag'>扫码</view>
+                  </view> 
+            </view> 
+            <view class='flex section-width'>
+                  <view class='section' bindtap='toJump'>
+                        <image src='../../images/recharge.png' class='section-img'></image>
+                        <view class='section-tag'>充值</view>
+                  </view> 
+                  <view class='section section-border-left' bindtap='toJump1'>
+                        <image src='../../images/coupon.png' class='section-img'></image>
+                        <view class='section-tag'>优惠券(<text class='section-tag-color'>{{index.coupon}}</text>)</view>
+                  </view> 
+            </view> 
+        </view> 
+
+        <!-- 购买时长 -->
+        <view style='background:#f0f0f0;padding-top:20rpx;' >
+             <view class=' num-control flex' style='padding-top:15px;'>
+            <view class='num0-0'>{{num01}}</view><view class='num0-1'>{{num02}}</view>
+            </view> 
+            <picker-view class='picker'  indicator-class="indicator-class"   value="{{value}}" bindchange='getSelectTime'>
+              <picker-view-column class='text-align'>
+                <view class='select-style radius-left' >购买时长</view>
+              </picker-view-column>
+              <picker-view-column class='text-align'>
+                <view wx:for="{{months}}" class='select-style select-num'>{{item}}</view>
+              </picker-view-column>
+              <picker-view-column class='text-align'>
+                <view class='select-style'>小时</view>
+              </picker-view-column>
+              <picker-view-column class='text-align'>
+                <view wx:for="{{days}}" class='select-style select-num'>{{item}}</view>
+              </picker-view-column>
+              <picker-view-column class='text-align'>
+                <view  class='select-style radius-right'>分钟</view>
+              </picker-view-column>
+            </picker-view>
+             <view class='picker num-control flex' >
+            <view class='num0-0'>{{num11}}</view><view class='num0-1'>{{num12}}</view>
+            </view> 
+            
+            <view class='flex total-control'>
+                  <view>
+                        <text class='price'><text class='mini'>￥</text>{{price}}.00</text> 
+                        <text decode='true' class='count-balance'>&ensp;/&ensp;账户余额&ensp;￥<text class='balance-color'>{{index.userinfo.yue}}</text>元</text>
+                  </view>
+                 <navigator url='../gz/gz'>
+                 <text class='free-rule flex' decode='true' bindtap='gz'>
+                 <text decode='true' class='question'>&ensp;?&ensp;</text> 计费规则</text></navigator>
+            </view>
+        </view>
+
+        <!-- 确认按钮 -->
+        <view class='btn-control'>
+              <button class='btn {{selectTime?"btn-bgcolor":""}}' bindtap="submitOrder" data-price='{{price}}' data-code='{{sb.code}}' data-storeTitle='{{sb.storeTitle}}'>确认</button>
+        </view>
+
+
+        <!-- 支付方式弹出框 -->
+        <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}">
+        </view>
+        <view class="modal-dialog" wx:if="{{showModal}}">
+              <view class="modal-title">
+                      <view>设备编号：123456789</view>
+                      <view>使用时长：0.5小时</view>
+              </view>
+              <view class="modal-content">
+                  <view class='flex modal-content-line'>
+                        <view class='modal-content-title'>支付金额：<text class='price'>60.00</text> 元</view>
+                  </view>
+              </view>
+              <view class="modal-footer" bindtap='showDialogBtn1'>
+                        <image src='/images/weixin.png' class='pay-img'></image>
+                        <view>微信支付</view>
+              </view>
+              <view class="modal-footer" bindtap='showDialogBtn1'>
+                        <image src='/images/pay.png' class='pay-img'></image>
+                        <view>余额支付</view>
+              </view>
+        </view>
+
+
+        <!-- 支付成功弹出框 -->
+        <view class="modal-mask1" bindtap="hideModal1" catchtouchmove="preventTouchMove" wx:if="{{showModal1}}">
+        </view>
+        <view class="modal-dialog1" wx:if="{{showModal1}}">
+              <view class="modal-title1">充值成功！</view>
+              <view class="modal-content1">
+                  <view class='flex modal-content-line1'>
+                        <view class='modal-content-title1'>您本次订单消费：60元</view>
+                  </view>
+                  <view class='flex modal-content-line1'>
+                        <view class='modal-content-title1'>使用时长：30分钟</view>
+                  </view>
+              </view>
+              <view class="modal-footer1">
+                <button class="btn-width1 " bindtap="onConfirm1" data-status="confirm1">确定</button>
+              </view>
+        </view>
+</view> 

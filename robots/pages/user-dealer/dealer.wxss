@@ -1,0 +1,92 @@
+/* pages/user-dealer/dealer.wxss */
+page{
+  background: #f0f0f0;
+}
+/* 进行中 */
+.section{
+  background:#fff;
+  margin-bottom:10rpx;
+  letter-spacing:3rpx;
+}
+.line-data{
+  width:94%;
+  margin-left:3%;
+  padding-top:10rpx;
+  /* justify-content:space-between; */
+}
+.line-left{
+  font-size:9pt;
+  width:55%;
+}
+.line-right{
+  font-size:9pt;
+}
+.line-right-start-time{
+  font-size:10pt;
+  font-weight:bold;
+}
+.line-right-end-time{
+  font-size:10pt;
+  font-weight:bold;
+  padding-top:10rpx;
+}
+.remain{
+  align-items:center;
+}
+.remaining-hours{
+  width:70%;
+  color: #d96b6a;
+  font-size:19pt;
+  font-weight: bold;
+  text-align: center;
+}
+.btns{
+  padding-bottom:20rpx;
+}
+.btn{
+  font-size:13pt;
+  width:28%;
+  height:60rpx;
+  line-height: 60rpx;
+  /* color:#555; */
+  font-weight:800;
+  background:linear-gradient(to bottom,#82eed7,#14b48e);
+}
+
+/* 已结束 */
+.section-width{
+  width:50%;
+  padding-top:15rpx;
+  padding-bottom:20rpx;
+}
+.section-left{
+  padding-left:10rpx;
+}
+.select-img{
+  width:7%;
+  height:30rpx;
+}
+.select-color{
+  color:#459aea;
+  height:35rpx;
+  line-height:35rpx;
+  font-size:10pt;
+  padding-left:8rpx;
+}
+
+.order-date{
+  color:#a3a5a7;
+  height:25rpx;
+  line-height:25rpx;
+  font-size:9pt;
+  padding-left:8rpx;
+}
+.order-content{
+  height:25rpx;
+  line-height:25rpx;
+  font-size:9pt;
+  padding-left:8rpx;
+}
+.border-top{
+  border-top:1px solid #f0f0f0;
+}

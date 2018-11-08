@@ -1,0 +1,193 @@
+<!--pages/user-dealer/dealer.wxml-->
+  <view class='section'>
+      <view class='section-width flex section-left' bindtap='showDialogBtn2'>
+            <image src='/images/question.png' class='select-img'></image>
+            <view class='select-color'>如何成为代理？</view>
+      </view> 
+      <view class='flex border-top'>
+              <view class='section-width flex section-left'>
+                    <view class='order-content'>我的等级：区域代理</view>
+              </view> 
+              <view class='section-width flex'>
+              </view> 
+      </view>
+      <view class='flex border-top'>
+              <view class='section-width flex section-left'>
+                    <view class='order-content'>我的押金：5000</view>
+              </view> 
+              <view class='section-width flex'>
+              </view> 
+      </view>
+      <view class='flex border-top'>
+              <view class='section-width flex section-left'>
+                    <view class='order-content'>我的设备：10台</view>
+              </view> 
+              <view class='section-width flex'>
+              </view> 
+      </view>
+  </view>
+  <view class='section'>
+      <view class='flex'>
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>设备编号：123456789(正常)</view>
+              </view> 
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>深圳市龙岗区坂田街道球馆</view>
+              </view> 
+      </view>
+      <view class='flex'>
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>加入时间：2018-8-10</view>
+              </view> 
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>已用时长：0.5小时</view>
+              </view> 
+      </view>
+      <view class='flex border-top'>
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>设备编号：123456789(正常)</view>
+              </view> 
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>深圳市龙岗区坂田街道球馆</view>
+              </view> 
+      </view>
+      <view class='flex'>
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>加入时间：2018-8-10</view>
+              </view> 
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>已用时长：0.5小时</view>
+              </view> 
+      </view>
+      <view class='flex border-top'>
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>设备编号：123456789(正常)</view>
+              </view> 
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>深圳市龙岗区坂田街道球馆</view>
+              </view> 
+      </view>
+      <view class='flex'>
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>加入时间：2018-8-10</view>
+              </view> 
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>已用时长：0.5小时</view>
+              </view> 
+      </view>
+      <view class='flex border-top'>
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>设备编号：123456789(正常)</view>
+              </view> 
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>深圳市龙岗区坂田街道球馆</view>
+              </view> 
+      </view>
+      <view class='flex'>
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>加入时间：2018-8-10</view>
+              </view> 
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>已用时长：0.5小时</view>
+              </view> 
+      </view>
+      <view class='flex border-top'>
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>设备编号：123456789(正常)</view>
+              </view> 
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>深圳市龙岗区坂田街道球馆</view>
+              </view> 
+      </view>
+      <view class='flex'>
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>加入时间：2018-8-10</view>
+              </view> 
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>已用时长：0.5小时</view>
+              </view> 
+      </view>
+      <view class='flex border-top'>
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>设备编号：123456789(正常)</view>
+              </view> 
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>深圳市龙岗区坂田街道球馆</view>
+              </view> 
+      </view>
+      <view class='flex'>
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>加入时间：2018-8-10</view>
+              </view> 
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>已用时长：0.5小时</view>
+              </view> 
+      </view>
+      <view class='flex border-top'>
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>设备编号：123456789(正常)</view>
+              </view> 
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>深圳市龙岗区坂田街道球馆</view>
+              </view> 
+      </view>
+      <view class='flex'>
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>加入时间：2018-8-10</view>
+              </view> 
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>已用时长：0.5小时</view>
+              </view> 
+      </view>
+      <view class='flex border-top'>
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>设备编号：123456789(正常)</view>
+              </view> 
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>深圳市龙岗区坂田街道球馆</view>
+              </view> 
+      </view>
+      <view class='flex'>
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>加入时间：2018-8-10</view>
+              </view> 
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>已用时长：0.5小时</view>
+              </view> 
+      </view>
+      <view class='flex border-top'>
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>设备编号：123456789(正常)</view>
+              </view> 
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>深圳市龙岗区坂田街道球馆</view>
+              </view> 
+      </view>
+      <view class='flex'>
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>加入时间：2018-8-10</view>
+              </view> 
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>已用时长：0.5小时</view>
+              </view> 
+      </view>
+      <view class='flex border-top'>
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>设备编号：123456789(正常)</view>
+              </view> 
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>深圳市龙岗区坂田街道球馆</view>
+              </view> 
+      </view>
+      <view class='flex'>
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>加入时间：2018-8-10</view>
+              </view> 
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>已用时长：0.5小时</view>
+              </view> 
+      </view>
+
+     
+      
+  </view>

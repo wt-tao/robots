@@ -1,0 +1,50 @@
+/* pages/recharge-record/record.wxss */
+.section{
+  background:#fff;
+  margin-bottom:10rpx;
+}
+
+.section-width{
+  width:35%;
+  padding-top:15rpx;
+  padding-bottom:20rpx;
+}
+.section-left{
+  padding-left:10rpx;
+}
+.select-img{
+ width:8%;
+  height:35rpx;
+}
+.select-color{
+  color:#459aea;
+  height:35rpx;
+  line-height:35rpx;
+  font-size:10pt;
+  padding-left:8rpx;
+}
+
+.order-date{
+  color:#d0d2d4;
+  height:25rpx;
+  line-height:25rpx;
+  font-size:9pt;
+  padding-left:8rpx;
+}
+.order-content{
+  height:25rpx;
+  line-height:25rpx;
+  font-size:9pt;
+  padding-left:8rpx;
+}
+.border-top{
+  border-top:1px solid #f0f0f0;
+}
+
+/* 底部注释 */
+.annotation{
+  width:97%;
+  font-size:9pt;
+  color:#a0a0a0;
+  text-align: right;
+}

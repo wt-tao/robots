@@ -1,0 +1,353 @@
+1、构建对象  new（对象实例化）
+	new 构造函数（参数）
+	var o = new Array()
+	
+2、定义对象直接量创建对象
+	var o = {x:1,y:true}
+	
+3、使用create()方法创建对象
+	Object.create(原型对象，属性对象（特性：writable，enumerable，configurable）)
+	var newObj = Object.create(null,{
+		size:{
+			value:'large',
+			enumerable:true
+		},
+		shape:{
+			value:'round',
+			enumerable:true
+		}
+	})
+	document.write(newObj.size + '<br/>')			//large
+	document.write(newObj.shape + '<br/>')			//round
+	document.write(newObj.getPrototypeOf(newObj))	//null
+	
+4、引用对象（对象本身不能直接用）放在堆区，不是栈区
+	o = {		//创建对象
+		x:1,
+		y:true
+	}
+	o1 = o;				//复制变量
+	alert(delete o);	//删除变量o,返回为true
+	alert(o1,x);		//再次读取对象内数据，1
+	alert(o,x);			//利用o来读取对象内的数据
+	
+5、复制对象：实现继承
+	function F(x,y){	//构造函数F
+		this.x = x,		//本地属性x
+		this.y = y;		//本地属性y
+		this.add = function(){	//本地方法add
+			return this.x + this.y;
+		}
+	}
+	F.prototype.mul = function(){	//原型方法mul()
+		return this.x * this.y
+	}
+	var f = new F(2,3)	//实例化构造函数并初始化
+	var o = {}
+	for(var i in f){//遍历构造函数实例
+		o[i] = f[i]
+	}
+	alert(o.x);//2
+	alert(o.y);//3
+	alert(o.add());//5
+	alert(o.mul());//6
+	
+6、克隆对象  对复制进行的优化
+	Function.prototype.clone = function(o){	//对象克隆方法
+		function Temp(){};			//新建空构造函数
+		Temp.prototype = o;			//把参数对象赋值给该构造函数的原型对象
+		return new  Temp();			//返回实例化后的对象
+	}
+	
+	function F(x,y){	//构造函数F
+		this.x = x,		//本地属性x
+		this.y = y;		//本地属性y
+		this.add = function(){	//本地方法add
+			return this.x + this.y;
+		}
+	}
+	F.prototype.mul = function(){	//原型方法mul()
+		return this.x * this.y
+	}
+	
+	var o = Function.clone(new F(2,3))		//调用Fcuntion的克隆对象
+	alert(o.x);//2
+	alert(o.y);//3
+	alert(o.add());//5
+	alert(o.mul());//6
+
+7、销毁对象
+	清理占用资源
+	无法清除是与外界有关系
+	
+8、为对象定义属性
+	属性名：属性值，用逗号分隔
+	o = {		//创建对象
+		x:1,
+		y:{
+			x:2,
+			y:false
+		}
+	}
+	还可以通过点运算符在结构体外定义属性
+	var 0 = {}
+	o.x = 1;
+	o.y = {
+		x:2,
+		y:false
+	}
+	也可以通过构造函数定义属性
+	var f = function(){
+		this.x = 1;
+		this.y = {
+			x:1,
+			y:false
+		}
+	}
+10、访问属性
+	1、点语法 左侧对象名，右侧属性名
+	o = {		//创建对象
+		x:1,
+		y:{
+			x:2,
+			y:false
+		}
+	}
+	alert(o.y.y)	//false
+	2、中括号
+	alert(o['y']['y'])
+	对象是属性的集合，因此可以用for/in来访问对象属性
+	o = {
+		x:1,
+		y:2
+	}
+	for(var i in o){
+		alert(o[i]);
+	}
+11、属性赋值
+	=号运算符
+	o = {
+		x:1,
+		y:2
+	}
+	o.x = 2;	//赋值，覆盖原有值
+	o['y'] = 1;	//赋值，覆盖原有值
+	alert(o.y)	//1
+	alert(o['x']//2
+	使用delete可以删除对象属性
+	var o = [x:1,y:2]
+	delete o.x
+	alert(o.x)
+	使用for/in语句则不会出现该值
+	
+12、使用方法
+	对象属性的一种特殊形式，是对象与外界进行交互的动作
+	var o = {
+		x :function(){
+			alert('method')
+		}
+	}
+	var o = {}
+	o.x = function(){
+			alert('method')
+		}
+
+	o.x()
+	
+13、配置属性的特效
+	seal()	相对严格，但是可以对值进行读写
+	freeze() 保护最严格
+	preventExtensions() 禁止添加新的属性
+	
+	eg:
+	var obj = {pasta:'spaghetti',length:10};
+	Object.preventExtensions(obj)
+	obj.newProp = 50;
+	obj.pasta = 50;
+	document.write(obj.newProp)		//undefined
+	document.write(obj.pasta)		//50
+		
+	//新增修改都无效
+	var obj = {pasta:'spaghetti',length:10};
+	Object.freeze(obj)
+	obj.newProp = 50;
+	obj.pasta = 50;
+	document.write(obj.newProp)		//undefined
+	document.write(obj.pasta)		//spaghetti
+
+14、检测属性的特效
+	isSealed()	检测对象是否被密封 无法添加修改新的属性返回true 否则false
+	isFrozen()	表示冻结，无法添加修改新的属性为true 否则false
+	isExtensible()  是否可拓展，可以true 否则false
+
+	eg:在修改属性值时，先检测
+	var obj = {pasta:'spaghetti',length:10};
+	if(!Object.isFrozen(obj)){
+		obj.pasta = 50;
+	}
+	Object.freeze(obj);
+	document.write(obj.pasta)
+
+15、使用toString()
+	function Me(){}
+	Me.prototype.toString = function(){
+		return '[object Me]'
+	}
+	var me = new Mw()
+	alert(me.toString())//[object Me]
+	alert(Object.prototype.toString.apply(me))//默认返回[object Me]
+
+16、如何重新valueOf()
+	建议重新valueOf()方法，当读取自定义对象的值时，避免返回的值总是[object Object]
+	function Point(x,y){
+		this.x = x;
+		this.y = y;
+	}
+	Point.prototype.valueOf = function(){
+		//自定义Point数据类型的valueOf()方法
+		return "(" + this.x + ", + this.y + ")";
+	}
+	var p = new Point(26,68);
+	alert(p.valueOf());//(26,68)
+	alert(Object.prototype.valueOf.apply(p))	//默认返回值[object Object]
+	
+	当获取自定义类型的对象p时，alert()方法会首先调用valueOf()方法.而不是toString()方法
+	若需要获取该对象的字符串表示，则必须明确调用toString()方法
+	function Point(x,y){
+		this.x = x;
+		this.y = y;
+	}
+	Point.prototype.valueOf = function(){
+		//自定义Point数据类型的valueOf()方法
+		return "(" + this.x + ", + this.y + ")";
+	}
+		Point.prototype.toString = function(){
+		//自定义Point数据类型的toString()方法
+		return "[object Object]"
+	}
+	var p = new Point(26,68);		//实例化对象
+	alert('typeof p = ' + p);		//默认调用valueOf()方法进行类型转发
+	alert('typeof p = ' + p.toString())//直接调用toString()方法进行类型转换
+	
+17、检测私有属性（本地属性）  继承属性又称共有属性
+	hasOwnProperty()
+	function F(){
+		this.name = '私有属性'
+	}
+	F.prototype.name = '继承属性'
+	
+	var f = new F()
+	alert(f.hasOwnProperty('name'))
+	//返回true  说明当前调用的name是私有属性
+	alert(f.name);//'私有属性'
+	
+18、检测枚举属性
+	使用for/in可遍历它的所有私有属性，但是js允许枚举的属性只有a.b.c
+	function F(){
+		this.a = 1;
+		this.b = 2;
+	}
+	F.prototype.c = 3;
+	f.d = 4;
+	var o = new F();
+	for(var i in o){
+		document.write(i + '<br />');
+	}
+	
+	检测方法：propertyIsEnumerable()检测本地方法是否枚举
+	alert(o.propertyIsEnumerable('a'))		//true 可以枚举
+	alert(o.propertyIsEnumerable('b'))		//true 可以枚举
+	alert(o.propertyIsEnumerable('c'))		//false 不可以枚举
+	alert(o.propertyIsEnumerable('d'))		//false 不可以枚举
+	var o = F;
+	alert(o.propertyIsEnumerable('d'))		//true 可以枚举
+	
+19、检测原型对象
+	prototype属性：存储构造函数的原型对象
+	isPrototypeOf()  :检测一个对象是否是另一个对象的原型
+	eg:
+	var f = function(){}
+	f.prototype = {		//函数原型对象
+		a:1,
+		b:function(){
+			return 2;
+		}
+	}
+	alert(f.prototype.a)	//读取函数原型对象的属性a  返回1
+	alert(f.prototype.b())	//读取函数原型对象的属性b 返回2
+	
+	var o = new f();		//实例对象
+	alert(o.a);				//访问原型对象的属性
+	alert(o.b());			//访问原型对象的属性
+	
+	var b =f.prototype.isPrototypeOf(o)
+	//可以判断f.prototype就是0的原型对象
+	alert(b);
+	
+20、静态方法：公共方法
+	
+21、定义原型
+	为构造函数定义原型
+	function p(x){
+		this.x = x;
+	}
+	p.prototype.x = 1			//添加原型属性x
+	var p1 = new p(10);			//实例化对象，并设置参数
+	p.prototype.x = p1.x		//设置原型属性值为本地属性
+	alert(p.prototype.x)		//10
+	
+	若构造函数定义了与原型属性同名的本地属性，则本地属性会覆盖
+	function p(x){
+		this.x = x;
+	}
+	p.prototype.x = 1			//原型属性
+	var p1 = new p(10);			//实例化对象
+	alert(p1.x)					//10
+	
+	如果使用delete运算符可删除本地属性，则原型属性会被访问
+	删除本地属性，会发现可以访问原型属性
+	delete p1.x					//删除本地属性
+	alert(p1.x)					//1,显示被覆盖的原型属性值
+	
+	eg:
+	function p(x,y,z){		//构造函数，声明本地属性并赋值
+		this.x = x
+		this.y = y
+		this.z = z
+	}
+	p.prototype.del = function(){		//定义原型方法
+		for(var i in this)
+		//遍历本地属性，删除实例对象内的所有属性和方法
+			delete this[i]
+	}
+	p.prototype = new p(1,2,3);
+		//实例化构造函数p，并把实例对象传递给原型对象
+	var p1 = new p(10,20,30)  //实例化构造函数p为p1
+	alert(p1.x)		//10  本地属性x的值
+	alert(p1.y)		//20  本地属性y的值
+	alert(p1.z)		//30  本地属性z的值
+	p1.del()		//调用原型方法，删除所有本地属性
+	alert(p1.x)		//1  原型属性x的值
+	alert(p1.y)		//2  原型属性y的值
+	alert(p1.z)		//3  原型属性z的值
+	
+22、比较原型属性和本地属性
+	本地属性各自独立，可以任意修改，不会影响，
+	原型属性是在prototype定义的
+	修改原型属性，其他也会被影响，
+	修改必须通过prototype
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

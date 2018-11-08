@@ -1,0 +1,100 @@
+<!--pages/user-students/students.wxml-->
+<view>
+      <view class='section1'>
+            <view class='flex section1-line'>
+                  <view class='flex filter'>
+                        <image src='/images/filter.png' class='filter-img'></image>
+                        <view class='filter-letter'>筛选</view>
+                  </view>
+                  <view class='header-info'>注：因系统原因，查询当天结果可能存在延时。
+                  </view>
+            </view> 
+            <view class='flex section1-line'>
+                  <view class='flex  select-date'>
+                        <view class='flex'>
+                              <view class='flex date'>
+                                  <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                                    <view class='date-letter'>{{array[index]}} </view>
+                                  </picker>
+                                    
+                                    <image src='/images/down-jiantou.png' class='date-img'></image>
+                              </view>-
+                              <view class='flex date'>
+                                 <picker bindchange="bindPickerChange1" value="{{index1}}" range="{{array1}}">
+                                    <view class='date-letter'>{{array1[index1]}} </view>
+                                  </picker>
+                                    <image src='/images/down-jiantou.png' class='date-img'></image>
+                              </view>-
+                              <view class='flex date'>
+                                  <picker bindchange="bindPickerChange2" value="{{index2}}" range="{{array2}}">
+                                    <view class='date-letter'>{{array2[index2]}} </view>
+                                  </picker>
+                                    <image src='/images/down-jiantou.png' class='date-img'></image>
+                              </view>
+                        </view>至
+                       <view class='flex'>
+                              <view class='flex date'>
+                                    <picker bindchange="bindPickerChange3" value="{{index3}}" range="{{array3}}">
+                                    <view class='date-letter'>{{array3[index3]}} </view>
+                                  </picker>
+                                    <image src='/images/down-jiantou.png' class='date-img'></image>
+                              </view>-
+                              <view class='flex date'>
+                                    <picker bindchange="bindPickerChange4" value="{{index4}}" range="{{array4}}">
+                                    <view class='date-letter'>{{array4[index4]}} </view>
+                                  </picker>
+                                    <image src='/images/down-jiantou.png' class='date-img'></image>
+                              </view>-
+                              <view class='flex date'>
+                                    <picker bindchange="bindPickerChange5" value="{{index5}}" range="{{array5}}">
+                                    <view class='date-letter'>{{array5[index5]}} </view>
+                                  </picker>>
+                                    <image src='/images/down-jiantou.png' class='date-img'></image>
+                              </view>
+                        </view>
+                  </view>
+                  <view>
+                        <button class='btn' bindtap='secb' data-startTime='{{array[index]}}-{{array1[index1]}} -{{array2[index2]}}' data-endTime='{{array3[index3]}}-{{array4[index4]}}-{{array45[index5]}}'>查询</button>
+                  </view> 
+            </view> 
+             <view class='flex section1-line3'>
+                  <label class='label {{item.id==ids?"on":""}}'  wx:for='{{yue}}' bindtap='yues' id='{{item.id}}'>{{item.text}}</label>
+            </view> 
+            <view class='flex section1-line'>
+                  <view class='flex  select-date' style='width:60%;margin-bottom:20rpx;'>
+                      <!-- <text class='salary-num'>40</text> -->
+                      <view class='salary'>教练积分：{{data}}</view>
+                  </view>
+                  <view style='width:25%;'>
+                        <navigator url='/pages/user-students/get-coupon/get-coupon?jifen={{data}}'>
+                              <button class='btn getsalary' style='font-size:10pt;width:165rpx;'>积分兑换</button>
+                        </navigator>
+                        
+                  </view> 
+            </view> 
+      </view>   
+  <view class='section'>
+      <view class='line-data flex'>
+            <view class='' style='font-size:9pt;'>学员人数：{{num}}人</view>
+           
+      </view>
+      <view class='line-data flex' style='background:#fff;color:#9f9f9f;border-top:1px solid #b3b3b3;' wx:for='{{students}}'>
+            <view class='line-img'>
+                <image class="option-icon" src="{{item.headimg==''?'/images/logo.png':item.headimg}}" />
+            </view>
+            <view class='line-left'>
+                <view style='padding-top:8rpx;'>{{item.name}}</view>
+                <view style='padding-top:8rpx;'>加入时间：{{item.createtime}}</view>
+                <view style='padding-top:8rpx;'>已用时长：{{item.time}}分钟</view>
+            </view>
+            <view class='line-right'>
+                <view class='line-right-start-time' style='padding:8rpx 0 18rpx 0;'>消费金额:<text decode='true' style='color:#5c5c5c;'>{{item.amount}}元</text>
+                </view>
+                <view class='line-right-end-time' style='padding:12rpx 0 0 0;'>获得积分:<text decode='true' style='color:#5c5c5c;'>{{item.jifen}}元</text>
+                </view>
+            </view>
+      </view>
+   
+      
+  </view>
+</view>

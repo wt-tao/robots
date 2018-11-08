@@ -1,0 +1,105 @@
+<!--pages/user-info/user-info.wxml-->
+<view>
+        <view class="after-navber">
+          <view class="option-list">
+            <!-- 更换头像 -->
+            <view bindtap='head_img'>
+                <!-- <navigator  url="/pages/user-info/change-pic/pictrue"> -->
+                    <view class="option-item border-top border-bottom">
+                        <view class="flex-row option-content">
+                            <view class="flex-grow-1 flex-row">
+                                <view class="flex-grow-0 flex-y-center">
+                                    <image class="option-icon" src="{{user.headimg==''?'/images/logo.png':user.headimg}}" />
+                                </view>
+                            </view>
+                            <view class="flex-grow-0 flex-y-center">
+                                <view class="flex-grow-1 flex-y-center user-label">
+                                    更换头像
+                                </view>
+                                <view class="flex-grow-0 flex-y-center">
+                                  <image class="option-jisntou" src="/images/icon-jiantou-r.png" />
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                <!-- </navigator> -->
+            </view>
+
+            <!-- 更换背景 -->
+            <view class="option-item border-bottom" bindtap='background'>
+                <!-- <navigator  url="/pages/user-info/change-bg/background"> -->
+                    <view class="flex-row option-content">
+                        <view class="flex-grow-1 flex-row">
+                            <view class="flex-grow-0 flex-y-center">
+                                <image class="option-icon" style='background:#459aea;' src="{{user.background==''?'':user.background}}" />
+                            </view>
+                        </view>
+                        <view class="flex-grow-0 flex-y-center">
+                            <view class="flex-grow-1 flex-y-center user-label">
+                                更换背景
+                            </view>
+                            <view class="flex-grow-0 flex-y-center">
+                                <image class="option-jisntou" src="/images/icon-jiantou-r.png" />
+                            </view>
+                        </view>
+                    </view>
+                <!-- </navigator> -->
+            </view>
+
+            <!-- 更换昵称 -->
+            <view>
+                <!-- <navigator  url=""> -->
+                    <view class="option-item border-bottom">
+                        <view class="flex-row option-content">
+                            <view class="flex-grow-1 flex-row">
+                                <view class="flex-grow-0 flex-y-center user-info">
+                                   {{user.name==''?"默认昵称":user.name}}
+                                </view>
+                            </view>
+                            <view class="flex-grow-0 flex-y-center">
+                                <input  class="flex-grow-1 flex-y-center user-label" style='width:200rpx;' placeholder='更欢昵称' bindblur='name'></input>
+                                <!-- </view> -->
+                                <view class="flex-grow-0 flex-y-center">
+                                  <image class="option-jisntou" src="/images/icon-jiantou-r.png" />
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                <!-- </navigator> -->
+            </view>
+
+            <!-- 更换手机 -->
+            <view>
+                <navigator class="option-item border-bottom" url="/pages/user-info/change-phone/phone">
+                    <view class="flex-row option-content">
+                        <view class="flex-grow-1 flex-row">
+                            <view class="flex-grow-0 flex-y-center user-info">
+                                {{user.phone==''?"":user.phone}}
+                            </view>
+                        </view>
+                        <view class="flex-grow-0 flex-y-center">
+                            <view class="flex-grow-1 flex-y-center user-label">
+                                更换手机
+                            </view>
+                            <view class="flex-grow-0 flex-y-center">
+                                <image class="option-jisntou" src="/images/icon-jiantou-r.png" />
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+            
+          </view>
+      </view>
+
+      <!-- 确认按钮 -->
+        <view class='btn-control'>
+              <button class='btn' bindtap='save'>保存</button>
+        </view>
+
+
+        <cover-view class='bottom-btn' bindtap='toStaticInfo' id='{{user.phone}}' >
+              统计信息
+        </cover-view>
+
+</view> 

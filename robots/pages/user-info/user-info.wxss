@@ -1,0 +1,105 @@
+/* pages/user-info/user-info.wxss */
+page{
+  background: #f0f0f0;
+}
+
+/* 下方选项 */
+/* .option-list {
+  margin-bottom: 20rpx;
+} */
+/* .option-list>view{
+  border-bottom: 1rpx solid #eee;
+} */
+
+.option-item {
+  background: #fff;
+  padding: 0 24rpx;
+  display: block;
+  position: relative;
+}
+
+.option-item .option-content {
+  /* border-bottom: 1rpx solid #eee; */
+  height: 115rpx;
+}
+
+.option-item .option-icon {
+  width: 100rpx;
+  height:100rpx;
+  margin-right: 24rpx;
+  border-radius: 50%;
+  border:1px solid #f0f0f0;
+}
+
+.option-item .option-jisntou {
+  width: 18rpx;
+  height:36rpx;
+  margin-left:50%;
+}
+
+button.option-item {
+  font-size: inherit;
+  color: inherit;
+  font-family: inherit;
+  border: none;
+  background: #fff;
+}
+/* 新增 */
+.flex-y-center {
+display:-webkit-flex;
+display:flex;
+-webkit-box-align:center;
+-webkit-align-items:center;
+-ms-flex-align:center;
+-ms-grid-row-align:50%;
+align-items:center;
+width:25%;
+}
+.user-info{
+  font-size:12pt;
+}
+.user-label{
+  font-size:10pt;
+}
+.border-top{
+    border-top:1px solid #f0f0f0;
+}
+.border-bottom{
+    border-bottom:1px solid #ebebeb;
+}
+
+/* 确认按钮 */
+.btn-control{
+  width:100%;
+  text-align: center;
+  height:165rpx;
+  background: #fff;
+  padding-top:42.5rpx;
+  
+}
+.btn{
+  font-size: 18pt;
+  width:70%;
+  height:80rpx;
+  line-height: 80rpx;
+  letter-spacing:3rpx;
+  /* color:#555; */
+  /* font-weight:800; */
+  background:linear-gradient(to bottom,#82eed7,#14b48e);
+}
+/* 统计信息 */
+.bottom-btn{
+  font-size: 12pt;
+  position:fixed;
+  top:93%;
+  background:#fff;
+  width:100%;
+  height:60rpx;
+  line-height: 60rpx;
+  padding-top:13rpx;
+  padding-bottom:30rpx;
+  border-top:2rpx solid #f0f0f0;
+  text-align: center;
+  letter-spacing:3rpx;
+  font-weight: bold;
+}

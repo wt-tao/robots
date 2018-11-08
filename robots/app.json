@@ -1,0 +1,74 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/user/user",
+    "pages/user-device/device",
+    
+    
+    "pages/select-day/day",
+    "pages/gz/gz",
+    "pages/orders/orders",
+    "pages/recharge-balance/recharge",
+    "pages/recharge-record/record",
+    "pages/recharge-coupon/recharge",
+    "pages/coupon-record/record",
+    "pages/coupon/coupon",
+    "pages/contact-service/contact-service",
+    "pages/fault-report/fault-report",
+    "pages/buy-time/buy-time",
+    "pages/give-advices/advices",
+    "pages/help-center/help-center",
+    "pages/about-us/about-us",
+    "pages/user-info/user-info",
+    
+    "pages/user-device/get-salary/get-salary",
+    "pages/user-device/get-salary-record/record",
+    "pages/user-info/change-pic/pictrue",
+    "pages/user-info/change-bg/background",
+    "pages/user-info/static-info/static",
+    "pages/user-info/change-phone/phone",
+    "pages/coupon-rule/rule",
+    "pages/user-students/students",
+    "pages/user-dealer/dealer",
+    "pages/user-invite/invite",
+    "pages/submit-order/submit-order",
+    "pages/user-students/get-coupon/get-coupon"
+    
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "plugins": {
+    "calendar": {
+      "version": "1.1.0",
+      "provider": "wx92c68dae5a8bb046"
+    }
+  },
+  "tabBar": {
+    "selectedColor": "#18bc9a",
+    "borderStyle": "black",
+    "list": [
+      {
+        "iconPath": "images/first.png",
+        "selectedIconPath": "images/select-first.png",
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "iconPath": "images/orders.png",
+        "selectedIconPath": "images/select-orders.png",
+        "pagePath": "pages/orders/orders",
+        "text": "订单"
+      },
+      {
+        "iconPath": "images/user.png",
+        "selectedIconPath": "images/select-user.png",
+        "pagePath": "pages/user/user",
+        "text": "我的"
+      }
+    ]
+  }
+}

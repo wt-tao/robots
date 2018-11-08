@@ -1,0 +1,69 @@
+<!--pages/coupon/coupon.wxml-->
+<view>
+      <view class='flex coupon-line' style='margin-top:3rpx;' bindtap="showDialogBtn" id='{{item.id}}' wx:for='{{coupon}}' data-endtime='{{item.syEndTime}}'>
+            <view class='coupon-left'>
+                    <view class='left-title'>{{item.name}}</view>
+                    <view class='left-price'>{{item.price}}元</view>
+                     <view class='left-id'>券号：{{item.no}}</view>
+            </view> 
+            <!-- <view class='coupon-left'>
+                  <image class='coupon-img' src='/images/coupon-1.png'></image>
+            </view>  -->
+            <view class='coupon-right'>
+                    <view class='coupon-source'>票券来源：{{item.name}}</view>
+                    <view class='coupon-id'><text decode='true'>券&emsp;&emsp;号</text>：{{item.no}}</view>
+                    
+                    <view class='coupon-end'>使用期至：{{item.syEndTime}}</view>
+                    <view class='coupon-start'><text decode='true'>适&emsp;&emsp;用</text>：{{item.remark}}</view>
+            </view> 
+      </view> 
+
+
+      <view class='flex coupon-line' style='margin-top:3rpx;' bindtap="showDialogBtn">
+            <!-- <view class='coupon-left'>
+                    <view class='left-title'>优惠券</view>
+                    <view class='left-price'>60元</view>
+                     <view class='left-id'>券号：5878</view>
+            </view>  -->
+            <view class='coupon-left'>
+                  <image class='coupon-img' src='/images/coupon-2.png'></image>
+            </view> 
+            <view class='coupon-right'>
+                    <view class='coupon-source'>票券来源：生日礼券</view>
+                    <view class='coupon-id'><text decode='true'>券&emsp;&emsp;号</text>：5678</view>
+                    <view class='coupon-end'>使用期至：2018 - 9 - 10</view>
+                    <view class='coupon-start'><text decode='true'>适&emsp;&emsp;用</text>：订单满100元使用</view>
+            </view> 
+      </view> 
+      <view class='flex coupon-line' style='margin-top:3rpx;' bindtap="showDialogBtn">
+            <!-- <view class='coupon-left'>
+                    <view class='left-title'>优惠券</view>
+                    <view class='left-price'>60元</view>
+                     <view class='left-id'>券号：5878</view>
+            </view>  -->
+            <view class='coupon-left'>
+                  <image class='coupon-img' src='/images/coupon-3.png'></image>
+            </view> 
+            <view class='coupon-right'>
+                    <view class='coupon-source'>票券来源：周年活动赠送</view>
+                    <view class='coupon-id'><text decode='true'>券&emsp;&emsp;号</text>：5678</view>
+                    <view class='coupon-end'>使用期至：2018 - 9 - 10</view>
+                    <view class='coupon-start'><text decode='true'>适&emsp;&emsp;用</text>：订单满60分钟使用</view>
+            </view> 
+      </view> 
+      <!-- 弹出框 -->
+        <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}">
+        </view>
+        <view class="modal-dialog" wx:if="{{showModal}}">
+              <view class="modal-title"></view>
+              <view class="modal-content">
+                  <view class='flex modal-content-line'>
+                        <view class='modal-content-title'>温馨提示：该优惠券还有{{end}}天到期确定现在使用吗</view>
+                  </view>
+              </view>
+              <view class="modal-footer">
+                <button class="btn-width" bindtap="onConfirm" data-status="confirm">确定</button>
+                <button class="btn-width" bindtap="onCancel" data-status="confirm">取消</button>
+              </view>
+        </view>
+</view> 

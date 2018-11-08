@@ -1,0 +1,211 @@
+<!--pages/orders/orders.wxml-->
+<view class="swiper-tab">
+ <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">进行中</view>
+ <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">已结束</view>
+</view>
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" bindchange="bindChange">
+ <!-- 进行中 -->
+ <swiper-item>
+  <view class='section' wx:for='{{order}}'>
+      <view class='line-data flex'>
+            <view class='line-left'>2018-8-10</view>
+            <view class='line-right'>订单编号：{{item.orderNo}}</view>
+      </view>
+      <view class='line-data flex'>
+            <view class='line-left'>
+                <view>{{item.storeTitle}}</view>
+                <view>设备编号：{{item.deviceCode}}</view>
+            </view>
+            <view>
+                <view class='line-right-start-time'>开始时间:<text decode='true'>&emsp;&emsp;{{item.startTime}}</text></view>
+                <view class='line-right-end-time'>结束时间:<text decode='true'>&emsp;&emsp;{{item.endTime}}</text></view>
+            </view>
+      </view>
+      <view class='line-data flex remain'>
+            <view class='line-right-start-time'>
+                剩余时长
+            </view>
+            <view class='remaining-hours' wx:for='{{time}}'>
+                {{item}}
+            </view>
+      </view>
+      <view class='line-data flex btns'>
+            <button class='btn' bindtap='toBuyTime' data-orderNo='{{item.orderNo}}' data-storeTitle='{{item.storeTitle}}' data-deviceCode='{{item.deviceCode}}'>加时</button>
+            <button class='btn' bindtap="showDialogBtn" id='{{item.orderNo}}'>结束</button>
+      </view>
+  </view>
+
+  <!-- 结束前弹出框 -->
+    <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}">
+        </view>
+        <view class="modal-dialog" wx:if="{{showModal}}">
+              <view class="modal-title"></view>
+              <view class="modal-content">
+                  <view class='flex modal-content-line'>
+                        <view class='modal-content-title'>温馨提示：本次订单尚有剩余时长确定要提前结束时用吗</view>
+                  </view>
+              </view>
+              <view class="modal-footer">
+                <button class="btn-width" bindtap="showDialogBtn1" data-status="confirm">确定</button>
+                <button class="btn-width" bindtap="onCancel" data-status="confirm">取消</button>
+              </view>
+        </view>
+ </swiper-item>
+
+ <!-- 一结束 -->
+ <swiper-item>
+  <view class='section flex'>
+      <view class='section-width flex section-left' bindtap='showDialogBtn2' style='padding-left:18rpx;'>
+            <image src='../../images/order-id.png' class='select-img'></image>
+            <view class='select-color'>订单编号查询</view>
+      </view> 
+      <view class='section-width flex' bindtap='showDialogBtn3' style='padding-left:18rpx;'>
+            <image src='../../images/order-date.png' class='select-img'></image>
+            <view class='select-color'>使用日期查询</view>
+      </view> 
+  </view>
+
+  <view class='section' wx:for='{{order1}}'>
+      <view class='flex'>
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>{{index}}</view>
+              </view> 
+      </view>
+      <block wx:for='{{order1[index]}}'>
+      <view class='flex border-top' bindtap='scanOrderDetail2' id='{{item.id}}'>
+              <view class='section-width flex section-left'>
+                    <view class='order-content'>使用时长：{{item.time}}分钟</view>
+              </view> 
+              <view class='section-width flex'>
+                    <view class='order-content'>消费金额：{{item.amount}}元</view>
+              </view> 
+      </view>
+        <!-- 订单详情 -->
+      <view wx:if='{{item.id==ids}}'>
+        <view class='flex border-top'>
+                <view class='section-width flex section-left'>
+                      <view class='order-content'>订单编号：{{item.orderNo}}</view>
+                </view> 
+                <view class='section-width flex'>
+                      <view class='order-content'>
+                        <view>{{item.storeTitle}}</view>
+                        <view>设备编号：{{item.deviceCode}}</view>
+                      </view>
+                </view> 
+        </view>
+        <view class='flex'>
+                <view class='section-width flex section-left'>
+                      <view class='order-content'>开始时间：{{item.startTime}}</view>
+                </view> 
+                <view class='section-width flex'>
+                      <view class='order-content'>结束时间：{{item.endTime}}</view>
+                </view> 
+        </view>
+        <view class='flex'>
+                <view class='section-width flex section-left'>
+                      <view class='order-content'>使用时长：{{item.time}}分钟</view>
+                </view> 
+                <view class='section-width flex'>
+                      <view class='order-content'>消费金额：{{item.amount}}元</view>
+                </view> 
+        </view>
+      </view>
+      </block>
+  </view>
+
+  <!-- 结束后弹出框 -->
+    <view class="modal-mask" bindtap="hideModal1" catchtouchmove="preventTouchMove" wx:if="{{showModal1}}">
+        </view>
+        <view class="modal-dialog" wx:if="{{showModal1}}">
+              <view class="modal-title"></view>
+              <view class="modal-content">
+                  <view class='flex modal-content-line'>
+                        <view class='modal-content-title'>温馨提示：本次订单已结束，感谢您对我们的支持！</view>
+                  </view>
+              </view>
+              <view class="modal-footer">
+                <button class="btn-width" bindtap="onConfirm1" data-status="">确定</button>
+              </view>
+      </view>
+    
+    <!-- 订单号查询弹出框 -->
+      <view class="modal-mask2" bindtap="hideModal2" catchtouchmove="preventTouchMove" wx:if="{{showModal2}}"></view>
+        <view class="modal-dialog2" wx:if="{{showModal2}}">
+          <view class="modal-title2">请输入订单编号</view>
+          <view class="modal-content2">
+            <view class="modal-input2">
+              <input placeholder-class="input-holder2" type="number" maxlength="18" bindinput="inputChange" class="input2"></input>
+            </view>
+          </view>
+          <view class="modal-footer2 flex">
+            <view class="btn-cancel2" bindtap="onCancel2" data-status="cancel">取消</view>
+            <view class="btn-cancel2" bindtap="onConfirm2" data-status="confirm" >确定</view>
+          </view>
+        </view>
+    <!-- 订单日期查询弹出框 -->
+        <view class="modal-mask2" bindtap="hideModal3" catchtouchmove="preventTouchMove" wx:if="{{showModal3}}"></view>
+        <view class="modal-dialog2" wx:if="{{showModal3}}">
+          <!-- <view class="modal-title2">请输入订单编号</view> -->
+          <view class="modal-title2"></view>
+          <view class="modal-content2">
+            <view class="modal-input2">
+                  <view class="box">
+                    <view class="box-flex date-total" >
+                          <view class='flex date-width' style='border-top-left-radius:20rpx;'>
+                                <image class="date-img" src='/images/date-left.png' bindtap="doYear" data-key='left0'></image>
+                                <view class="item-content1 date-color">{{currentYear}}</view>
+                                <image class="date-img" src='/images/date-right.png' bindtap="doYear" data-key='right0'></image> -
+                          </view>
+                          <view class='flex date-width'>
+                                <image class="date-img" src='/images/date-left.png' bindtap="doDay" data-key='left'></image>
+                                <view class="item-content1 date-color">{{currentMonth}}</view>
+                                <image class="date-img" src='/images/date-right.png' bindtap="doDay" data-key="right"></image>
+                          </view> 
+                    </view>
+                    <view class="box-flex">
+                      <view class="flex-item">
+                        <view class="item-content weekday-color">一</view>
+                      </view>
+                      <view class="flex-item">
+                        <view class="item-content weekday-color">二</view>
+                      </view>
+                      <view class="flex-item">
+                        <view class="item-content weekday-color">三</view>
+                      </view>
+                      <view class="flex-item">
+                        <view class="item-content weekday-color">四</view>
+                      </view>
+                      <view class="flex-item">
+                        <view class="item-content weekday-color">五</view>
+                      </view>
+                      <view class="flex-item">
+                        <view class="item-content weekday-color">六</view>
+                      </view>
+                      <view class="flex-item">
+                        <view class="item-content weekday-color">日</view>
+                      </view>
+                    </view>
+                    <view class="box-flex">
+                      <view class="flex-item border-top" wx:for="{{currentDayList}}" wx:for-index='key' wx:for-item="vo" wx:key="{{key}}">
+                          <view class="item-content {{vo == ids?'bk-color-day':''}}" bindtap='shij'  id='{{vo}}'>
+                              <view class='new-date'> {{vo}}</view>
+                              <view class='lunar-date'>{{currentLunarList[key]}}</view>
+                          </view>
+                          <!-- <view class="item-content bk-color-day" wx:else>
+                              <view class='new-date'> {{vo}}</view>
+                              <view class='lunar-date'>{{currentLunarList[key]}}</view>
+                          </view> -->
+                      </view>
+                    </view>
+                  </view>
+            </view>
+          </view>
+          <view class="modal-footer2 flex">
+            <view class="btn-cancel2" bindtap="onCancel3" data-status="cancel">取消</view>
+            <view class="btn-cancel2" bindtap="onConfirm3" data-status="confirm">确定</view>
+          </view>
+        </view>
+  
+ </swiper-item>
+</swiper>
+

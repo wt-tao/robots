@@ -1,0 +1,399 @@
+js学习
+1、预编译
+	js脚本字符流-->词法分析器  	-->(记号)   		语法分析器
+							   <--(取下一个记号)
+							   
+					---			 符号表  			---
+					
+	即把字符流转换为记号流
+	
+	预编译提前
+	eg:
+	<script>
+			alert(a);   //返回undefined
+			var a = 1;
+			alert(a);
+			
+			//可以化为
+			var a
+			alert(a);   //返回undefined
+			 a = 1;
+			alert(a);
+	</script>
+	即用var申明变量提取到所有代码之前
+	eg：	
+	 f() //调用函数  返回值1
+		function f(){
+			alert(1)
+		}
+		
+2、js执行顺序
+	依照代码块执行
+	尽量申明变量在一个代码块内，变量可以在每个代码块内共享，但是要注意代码块的顺序
+
+3、响应事件
+	js的响应事件执行顺序不受控制(不确定 
+	window.onload=function(){
+			执行函数
+			//onload为页面加载完毕后执行
+	}
+	 
+4、设计动态脚本
+	eg：
+		document.write('<script typr="text/javaScript">');
+			document.write('f(); ');
+			document.write('function f(){ ');
+			document.write('alert(1) ');
+			document.write('} ');
+			document.write('<\/script> ')
+			
+	若将document.write('<script typr="text/javaScript">'); 
+	document.write('<\/script> ')注释
+	 
+	则输出 f(); function f(){ alert(1) }
+	
+5、使用try-catch语句
+	语法
+		try{
+		//可能会导致错误的代码
+		}
+		catch(error){
+			//在错误发生时怎么处理
+		}
+	eg：
+	try{
+		a+b
+		}
+		catch(e){
+			alert("非法变量")
+			//参数e
+			//e.message可以显示出错误信息
+			//IE则是e.description e.name则是错误类型 e.fileName错误文件
+			
+		}
+		
+6、使用finally（可选句子，写了后必执行）
+	eg：
+	function test(){
+		try{
+			return 2;
+		}catch(error){ 
+			return 1;
+		}finally{
+			return 0;
+		}
+	}
+	var a=test()
+	alert(a)              //输出0
+	
+7、使用throw
+	eg:
+	function divide(num1,num2){
+		if(typeof num1 != 'number' || typeof num2 != 'number')
+			throw new Error('divide():凉哥参数必须是数字');
+		return num1/num2;
+	}
+	function assert(condition,message){
+		if(!condition){
+			throw new Error(message)
+		}
+	}
+	
+	function divide(num1,num2){
+		if(typeof num1 != 'number' && typeof num2 != 'number','divide():凉哥参数必须是数字');
+		return num1/num2;
+	}
+	var result =divide(10,23);
+	result=divide('hi',3)
+	
+8、抛出时机
+	eg：
+	function process(values){
+		values.sort();
+		for(var i=0;i<values.length;i++){
+			if(values[i]>100){
+				return values[i];
+			}
+		}
+		return -1;
+	}
+	process(1);         //输出 values.sort is not a function  不支持sort方法
+	
+	
+	主动抛出
+	function process(values){
+			//主动抛出异常
+		if(!(values instanceof Array)){
+			throw new Error('process():参数必须为数组')
+		}
+		values.sort();
+		for(var i=0;i<values.length;i++){
+			if(values[i]>100){
+				return values[i];
+			}
+		}
+		return -1;
+	}
+	process(1); 		//输出process():参数必须为数组
+	
+9、显示错误信息
+	eg:
+	function log(message){
+		var console = document .getElementById('debuginfo');
+		if(console == null){
+			console=document.createElement("div");
+			console.id = "debuginfo";
+			console.style.background = "#dedede";
+			console.style.border = "1px solid silver";
+			console.style.padding = "5px";
+			console.style.width = "400px";
+			console.style.position = "absolute";
+			console.style.right = "0px";
+			console.style.top = "0px";
+			document.body.appendChild(console);
+		}
+		console.innerHTML += "<p>" + message +"</p>";
+	}
+	function sum(num1,num2){
+		log('参数值：'+ num1 + '、' + num2);
+		log('和为:');
+		var result = num1 + num2;
+		log(result);
+		return result;
+	}
+	window.onload =function(){
+		sum(10,23);
+	}
+	//这样可将信息显示在页面上，但是要清除，只是为了方便开发
+	
+10、字符编码
+	Unicode字符集
+	eg：
+	var 人名 =  '老张'
+	function 睡觉(谁){
+		alert(谁 + ':快睡觉！')
+	}
+	睡觉(人名)    //老张：快睡觉
+	说明js支持双字节 （不建议中文命名）
+	应使用ASCII字符集 （兼容性高，较安全）
+	
+11、区分大小写
+	建议所有变量和函数名都使用小写（有效减少手写的失误）
+	定义构造函数名时  首字母大写（区分构造函数和普通函数 ）
+	eg：
+	d = new Date()			//获取当前日期和时间
+	alert(d.toString());	//显示日期
+	
+	//小驼峰命名法就是在每一个逻辑断点都有一个大写字母来标记，如：
+		printEmployeePaychecks();
+	//如果使用下划线命名法 则如：
+		print_employee_paychecks();
+	//帕斯卡命名法（大驼峰命名法），即每个逻辑断点都首字母大写；如：
+		PrintEmployeePaychecks();
+
+12、标识符（表示名称的意思；包含变量名，函数名等）
+	第一个字母必须是字母,_,$等
+	 js中转义序列也可以识别  特殊情况（特殊字符，js关键字，程序脚本等时）用到
+	 eg：
+	 var \u0061bc='标识符abc（变量）中的a字符的Unicode转义序列是\\u0061'
+	 alert(\u0061bc)   //标识符abc（变量）中的a字符的Unicode转义序列是\\u0061 
+	 
+13、直接量（直接显示出来的值 类似常量）
+	'字符串直接量'   //字符串直接量
+	123456       	 //数值直接量
+	true       	 //布尔值直接量
+	/^ab.*/g       	 //正则表达式直接量
+	null       	 //特殊值直接量
+	{a:1,b:2}       	 //对象初始化直接量
+	{1,2}       	 //数值初始化
+	放在'='的右侧，左侧则报错
+
+14、关键字（名词）和保留字
+	关键字
+	eg：break  delete function return if this return var void while false
+
+15、分隔符
+	对代码进行格式化
+	eg1：
+	function toStr(a){return a.toString();}
+	
+	function toStr(a){
+		return a.toString();}
+	
+	function toStr(a){
+		return a.toString();
+	}
+	eg2:
+	functiontoStr(a){returna.toString();}   //错误写法
+	
+	function toStr(a){return a.toString();}  //正确写法
+	
+	eg3:
+	function toStr(a){                      //错误的换行
+		return
+		a.toString();
+	}
+	alert(toStr('abc'))						//undefined
+
+	function toStr(a){                      //错误的换行
+		return a.toString();
+	}
+	alert(toStr('abc'))						//abc
+	
+	eg4:
+	function toStr(a){
+		return a.to String();				//错误分隔符
+	}
+	
+	eg5:
+	var a = '空格 制表符和换行符'
+	var b = '空格 制表符 和换行符'
+	alert((a==b).toString())				//false
+	
+16、注释 
+	单行注释信息
+   一般//  
+	//后面全为注释信息
+	/*
+	多行注释
+	多行注释
+	*/
+	
+17、转义序列
+	为支持所有有效的Unicode编码字符集  \u十六进制
+	eg：
+	document.write('字符编码')
+	document.write('字符编\u7801')    //字符编码
+	
+18、声明变量
+	var 变量名
+	可以声明多个变量 用逗号隔开
+	var a=1，b=2;
+	也可以不赋值，没有赋值打印为undfined
+	
+	可以用typeof a='undefined'来检测是否赋值
+	
+19、赋值变量（注意作用域）
+	var a = 1;											//全局变量
+	(function(){
+		var b = 2;										//第一层局部变量
+		(function(){
+			var c = 3;									//第二层局部变量
+			(function(){
+				var d = 4;								//第三层局部变量
+				alert(a + b + c + d)					//10
+			})()										//直接调用函数
+		})()											//直接调用函数
+	})()												//直接调用函数
+	
+20、变量的作用域（变量在程序中可供有效访问的有效范围和区域，也称为可视性；分为全局作用域和局部作用域）
+	优先级问题
+	var a = 1;  		//全局变量
+	(function f(){
+		var a = 2  		//局部变量
+		alert(a)  		//2
+	})()          		//直接在函数体内访问函数
+	
+	var a = 1;  		//全局变量
+	(function f(a){		//参数变量
+		alert(a)  		//3
+	})(3)          		//直接调用函数,并传递参数值为3
+
+	var a = 1;  		//全局变量
+	(function f(a){		//参数变量
+		var a = 2  		//局部变量
+		alert(a)  		//2
+	})(3)   			//直接调用函数,并传递参数值为3
+
+	//局部作用域嵌套
+	var  a= 1;											//全局变量
+	(function(){
+		var a = 2;										//第一层局部变量
+		(function(){
+			var a = 3;									//第二层局部变量
+			(function(){
+				var a = 4;								//第三层局部变量
+				alert(a)								//4
+			})()										//直接调用函数
+		})()											//直接调用函数
+	})()
+
+	eg:
+	(function(){										//定义封装的独立作用域
+		var jQuery = window.jQuery = window.$ = function(selector,context){
+				return new jQuery.fn.init(selector,context)
+		};
+		jQuery.fn = jQuery.prototype={
+			//详细代码
+		}
+		jQuery.fn.init.prototype = jQuery.fn;
+		jQuery.extend = jQuery.fn.extend = function(){
+			//详细代码
+		}
+		
+	})()													//直接调用函数
+	
+	
+	(function(){										//定义封装的独立作用域
+		var jQuery = window.jQuery = window.$ = function(selector,context){};	
+	})()													//直接调用函数
+	var jQuery = 1
+	var $ = 2
+ 
+ 
+	eg:    //不显示声明局部变量带来的后果
+	jQuery = 1
+	(function(){										//定义封装的独立作用域
+		 jQuery = window.jQuery = window.$ = function(){};	
+	})()													
+	alert(jQuery)										//只读取了函数内部封装的代码
+
+	
+21、避免变量污染（针对全局变量）
+	1、可以把变量放在属性上
+	/*应该避免使用全局变量，努力建设使用全局变量的方法，
+	在应用程序员中创建唯一一个全局变量，并定义该变量为当前应用的容器*/
+	eg: 
+	var My = {}
+	My.name = {
+		'first-name' : 'first',
+		'last-name' : 'last'
+	};
+	My.work = {
+		number:123,
+		one:{
+			name : 'one',
+			time : '2018-10-10 16:45',
+			city : 'chengdu'
+		},
+		two:{
+			name : 'two',
+			time : '2018-10-11 16:45',
+			city : 'shanghai'
+		}
+	};
+	2、使用函数，把变量封装在函数体内
+	/*作用域控制着变量与参数的可见性及生命周期，这位程序开发提供了一个重要的帮助，
+	因为减少了名称冲突，并且提供了自动内存管理*/
+	var foo = function(){
+		var a = 1,b = 2;
+		var bar = function(){
+			var b = 3,c = 4;  //a=1,b=3,c=4
+			a += b + c 		  //a=8,b=3,c=4
+		};					  //a=1,b=2,c=undefined
+		bar();				  //a=21 b=2 c=undefined
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

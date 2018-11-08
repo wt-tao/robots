@@ -1,0 +1,451 @@
+1、闭包函数：实质嵌套函数
+	function f(x){				//外部函数
+		return function(){		//内部函数
+			return x			//访问外部函数中的局部变量
+		}
+	}
+	var c = f(5);				//调用外部函数，并赋值
+	alert(c())
+	
+2、使用闭包
+	eg：使用闭包结构能够跟踪动态环境中数据的实时变化，并即时存储
+	function f(){				//定义普通函数f
+		var a = 1;				//定义局部变量并赋值为1
+		var b = function(){		//定义闭包，并赋值给局部变量b
+			return a;			//返回函数参数x
+		}
+		a++;					//动态更新函数内局部变量a的值
+		return b;				//返回闭包结构
+	}
+	var c = f();				//调用函数f
+	alert(c())					//2 
+	
+	eg:
+	function f(){		//普通函数f，包含多个闭包的外部函数
+		var a = 1;		//定义函数内局部变量a，并设置初始值
+		b = function(){	//闭包b
+			alert(a)		//寄存函数内部变量a的值
+		}
+		c = function(){	//闭包c	
+			a++				//递增并寄存函数内部变量a的值
+		}
+		d = function(){ //闭包d
+			a = x			//传递并寄存函数内部变量a的值
+		}
+	}
+	<button onclick="f()">按钮1：(f())()</button><br />
+	<button onclick="b()">按钮1：(b = function(){alert(a);})()</button><br />
+	<button onclick="c()">按钮1：(c = function(){a++;})()</button><br />
+	<button onclick="d(100)">按钮1：(d = function(){a = x;})()</button><br />
+	
+	
+	eg:
+	function f(x){
+	//定义功能函数，吧参数数组的元素以闭包体分包封装在数组中并返回
+		var a = [];
+		for(var i = 0; i < x.length; i ++){
+			var temp=x[i];		//临时每个存储数组元素的值
+			a.push(function(){	//把数组元素值封装在闭包中投入到临时数组中
+				alert(temp + ' ' + x[i])	//闭包中被封装的参数数组元素
+			});
+		}
+		return a;			//返回临时数组a
+	}
+	
+	function e(){
+		var a = f(['a','b','c']);		//调用函数f，并向其传递一个数组
+		for(var i = 0; i < a.length; i ++){		//遍历函数f返回的值	
+			a[i]();		//调用闭包，查看内部封装的数组元素
+			
+		}
+	}
+	e();			//调用函数e
+	
+	eg:
+	function f(x){
+		var temp = x;
+		return function(x){		//返回闭包
+			temp += x;
+			alert(temp);
+		}
+	}
+	var a = f(50)	//生成第一个闭包
+	var b = f(100)	//生成第二个闭包
+	a(5)			//返回55
+	b(10)			//返回110
+	
+3、定义闭包存储器
+	function f(a,b){
+		return function(){
+			a(b);
+		}
+	}
+	var c = f(alert,'hello,word')
+	var d = setTimeout(c,1000)		//把闭包作为参数进行传递
+	
+4、在事件处理中应用闭包
+	
+	eg:
+	function f(o,m){		//事件处理封装函数
+		return function(e){
+			//返回闭包函数，将作为一个DOM元素的事件处理器
+			e = e || window.event;		//获取事件处理对象
+			return o[m](e,this)
+			//返回闭包函数，利用传递的必要参数，封装事件处理函数
+		}
+	}
+	function g(id){		//封装事件处理函数，以实现在页面初始化事件中触发
+		return function(){		//返回时间处理器函数
+			var e = document.getElementsByTagName(id);
+			if(e){		//判断是否存在指定对象集合
+				for(var i in e){			//变量对象集合
+					e[i].onclick = f(g,'click')
+					//调用关联处理器，把对象与方法捆绑到事件属性中
+					e[i].onmouseover = f(g,'over') //调用关联函数
+					e[i].onmouseout = f(g,'out') //调用关联函数
+				}
+			}
+		}
+	}
+	g.click = function(event,element){
+		//为事件处理封装函数定义额外的事件处理方法
+		element.style.backgroundColor = 'red'
+	}
+	g.over = function(event,element){
+		//为事件处理封装函数定义额外的事件处理方法
+		element.style.backgroundColor = 'blue'
+	}
+	g.out = function(event,element){
+		//为事件处理封装函数定义额外的事件处理方法
+		element.style.backgroundColor = 'transparent'
+	}
+	window.onload = g('div')		//在页面初始化事件中绑定事件处理函数
+	<p>p1</p>
+	<p>p2</p>
+	<p>p3</p>
+	<p>p4</p>
+
+	5、绑定函数
+		<input type='submit' id='btn' />
+		
+		var o = {
+			i:'true',
+			f:function(){
+				alert(this.i)
+			}
+		};
+		var btn = document.getElementsById('btn');
+		btn.addEventListener('click',o.f)
+		//返回undefined  this指针问题
+		btn.addEventListener('click',o.f.call(o)) //true  改变了指针，但是不能这么调用
+
+		btn.addEventListener('click',funco(){
+		o.f.call(o)
+		});		//true  改变了上下文  ，较麻烦
+
+		//利用工具函数  改变调用函数的上下文，不能直接调用
+		function bind(fn,contetx){
+			return function(){
+				return fn.apply(contetx,arguments);
+			}
+		}
+		
+		btn.addEventListener('click',bind(o.f,o))	//true
+
+		
+		btn.addEventListener('click',bind(o.f,{i:1}))	//1
+
+
+6、链式语法：在一个对象上可以连续调用不同的方法
+		eg：
+		getElement('box').
+			move(350,150).
+			width(100).height(100).
+			color('red').
+			border('10px outset').
+			padding('4px').
+			appendText('使用链式语法')
+
+		eg：为String扩展了三个方法trim，writeln，alert；alert和writeln返回值为this，而trim方法返回值为修建后的字符串
+		Function.prototype.method = function(name,func){
+			if(!this.prototype[name]){
+				this.prototype[name] = func;
+				return this;
+			}
+		};
+		String.method('trim',function(){
+			return this.replace(/^\s+|\s+$/g,'');
+		});
+		String.method('writeln',function(){
+			document.writeln(this);
+			return this;
+		});
+		String.method('alert',function(){
+			window.alert(this);
+			return this;
+		})
+		var str = ' abc ';
+		str.trim().writeln().alert();
+
+7、函数节流：避免频繁调用函数对系统造成负担(延迟执行)
+	<div id='box' style='border:solid 1px red'>test</div>
+
+	var o = {
+		id:null,
+		f:function(e){
+			e.innerHTML = e.innerHTML + 'ok<br/>'
+		},
+		r:function(box){
+			clearTimeout(this.id);	//清理没执行的定时器函数，防止堆积影响执行效率
+			var that = this;
+			this.id = setTimeout(function(){
+				that.f(box);
+			},100);
+		}
+	};
+	var div = document .getElementsById('box');
+	div.onmouseover = function(){
+		o.e(box);
+	}
+	
+8、分支函数：也是闭包体，使用闭包体是为了解决在浏览器兼容性检测中反复进行判断的行为
+			一般使用if语句
+		var XHR = function(){
+			//标准浏览器
+			var standard = {
+				creatXHR : function(){
+					return new XMLHttpRequest();
+				}
+			}
+			//IE
+			var newActionXObject = {
+				creatXHR : function(){
+					return new ActionXObject('Msxml2.XMLHTTP');
+				}
+			}
+			var oldActionXobject = {
+				creatXHR : function(){
+					return new ActionXObject('Microsoft.XMLHTTP');
+				}
+			}
+			if(standard.creatXHR()){
+				return standard;
+			}else{
+				try{
+					newActionXObject.creatXHR();
+					return newActionXObject;
+				}catch(o){
+					oldActionXobject.creatXHR();
+					return oldActionXobject;
+				}
+			}
+		}	
+		
+9、惰性载入函数	：与分支函数类似
+	eg：
+	var addEvent = function(el,type,handle){
+		addEvent = el.addEventListener ? function(el,type,handle){  //el.addEventListener判断浏览器是否支持
+			el.addEventListener(type,handle,false);
+		}:function(el,type,handle){
+			el.attachEvent('on' + type,handle);
+		};
+		//在第一次执行addEvent函数时，修改了addEvent函数之后，必须执行一次
+		addEvent(el,type,handle);
+	}
+		
+10、惰性求值：一次运算，多次应用
+		js具有非惰性求值的特性
+		eg：
+		var a = 2;
+		function f(x){
+			return x;
+		}
+		alert(f(a,a = a * a));//2
+		alert(f(a))	//4
+		
+		
+		function f(){}
+		f(function(){while(true);}())
+		
+		闭包体具有保存数据的功能
+		
+		var t;
+		function f(){
+			t = t ? t : new Date();
+			return t;
+		}
+		f();
+		f();
+		f();
+		避免反复调用时间对象
+		避免js非惰性运算特性
+		var f = (function(){
+			var t;
+		return function f(){
+			t = t ? t : new Date();
+			return t;
+		}
+		})();
+		alert(f());	//19:25:06
+		alert(f());	//19:25:06
+		alert(f());	//19:25:06
+		
+		优化：
+		var f = function(){
+			var t = new Date();
+			f = function(){
+				return t;
+			}
+			return f();
+		};
+		alert(f());	
+		alert(f());	
+		alert(f());	
+		优势：在特定条件下，计算一次就不再计算，除非计算改变，防止多次求值，占资源
+		
+11、记忆：利用闭包的存储功能
+	提现在递归
+	eg：斐波那契数列：计算指定一个数，获取他前面两个数的和
+		var fibonacci = function(n){
+			return n < 2 ? n : fibonacci(n - 1) + fibonacci(n - 2);
+		};
+		for(var i = 0;i <= 10; i += 1){
+			document.writeln('<br>' + i + ': ' + fibonacci(i));
+		}
+		很耗费资源
+		优化：
+		var fibonacci = (function(){
+			var memo = [0,1];
+			var fib = function(n){
+				var result = memo[n];
+				if(typeof result !== 'number'){
+					result = fib(n - 1) + fib(n - 2);
+					memo[n] = result;
+				}
+				return result;
+			}
+			return fib;
+		}());
+		for(var i = 0;i <= 10; i += 1){
+			document.writeln('<br>' + i + ': ' + fibonacci(i));
+		}
+	
+12、构建模块
+	Function.prototype.method = function(name,func){
+		if(!this.prototype[name]){
+			this.prototype[name] = func;
+			return this;
+		}
+	};
+	String.method('deentityify',function(){
+		var entity = {
+			quot : '"',
+			lt:'<',
+			gt:'>'
+		};
+		return function(){		//替换特殊字符
+			return this.replace(/&([^&;]+);/g,function(a,b){
+				var r = entity[b];
+				return typeof r === 'string' ? r : a; 
+			});
+		};
+	}());
+	document.writeln('&lt;&quot;&gt;'.deentityify());//<">
+		
+13、柯里化
+	//绑定函数
+	function bind(fn.context){
+		var args = Array.prototype.slice.call(arguments,2);
+		return function(){
+			var innerArgs = Array.prototype.slice.call(arguments);
+			var finalArgs = args.concat(innerArgs);
+			return fn.apply(context,finalArgs);
+		};
+	}
+	//柯里化函数：实现套用功能
+	function curry(fn){
+		var args = Array.prototype.slice.call(arguments,1);
+		return function(){
+			var innerArgs = Array.prototype.slice.call(arguments);
+			var finalArgs = args.concat(innerArgs);
+			fn.apply(null,finalArgs);
+		};
+	}
+
+14、高阶函数：函数嵌套的使用
+		为一个函数传递一个函数并返回一个函数
+		
+		var a = new Object();
+		var b = new Object();
+		var c = new Object();
+		a.id = 1;
+		b.id = 2;
+		c.id = 3;
+		a.date = new Date(2012,3,12);
+		a.date = new Date(2012,1,15);
+		a.date = new Date(2012,2,10);
+		//存放在arr数组中
+		var arr = [a,b,c];
+		//开始调试，留言id的排列是按1,2,3这样的顺序的
+		arr.sort(
+			function(x,y){
+				return x.date - y.date;
+			}
+		)
+
+15、递归运算
+	eg：
+	var f = function(x){
+		if(x < 2)
+			return 1;		//递归终止
+		else
+		return x * arguments.callee(x - 1);	//递归调用  arguments.callee对自身函数的调用，针对不知道函数名
+	}
+	alert(f(20))
+
+16、尾递归运算：对传统递归算法的一种优化算法，从最后开始运算，每递归一次，就算出相应的结果
+		函数调用出现在调用函数的尾部
+		好处：不需要保存任何局部变量，返回时调用函数可以直接调用返回值，不需要进行大量的保存,降低资源消耗
+		
+	eg：
+	var f = function(x){
+		if(x < 2)
+			return 1;		//递归终止
+		else
+		return x * arguments.callee(x - 1);	//递归调用  arguments.callee对自身函数的调用，针对不知道函数名
+	}
+	alert(f(5))
+	
+	简化：
+	function f(n){
+		return (n == 1) ? 1 : n * f(n - 1);
+	}
+	alert(f(5))
+	
+	转化：
+	function f(n){
+		return (n == 1) ? 1 : e(n,1);
+	}
+	function e(n,a){
+		return (n == 1) ? a : e(n - 1,a * n);
+	}
+	alert(f(5));
+	
+	传统：
+	f(5) = {5 * f(4)}
+		 = {5 * {4 * f(3)}}
+		 = {5 * {4 * {3 * f(2)}}}
+		 = {5 * {4 * {3 * {2 * f(1)}}}}
+		 = {5 * {4 * {3 * {2 * 1}}}}
+		 = {5 * {4 * {3 * 2}}}
+		 = {5 * {4 * 6}}
+		 = {5 * 24}
+		 = 120
+		 
+	尾递归：
+	f(5) = f(5,1)
+		 = f(4,5)
+		 = f(3,20)
+		 = f(2,60)
+		 = f(1,120)
+		 = 120

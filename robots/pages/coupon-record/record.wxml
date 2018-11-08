@@ -1,0 +1,56 @@
+<!--pages/recharge-record/record.wxml-->
+<view>
+  <view class='section' wx:for='{{record}}'>
+      <view class='flex-items-justify' >
+              <view class='section-width flex section-left'>
+                    <view class='order-date'>{{index}}</view>
+              </view> 
+      </view>
+   <block wx:for='{{record[index]}}'>
+      <view class='flex-items-justify border-top' bindtap='scanCouponDetail1' id='{{item.id}}'>
+              <view class='section-width flex section-left'>
+                    <view class='order-content'>变更时间：{{item.time}}</view>
+              </view> 
+              <view class='section-width flex'>
+                    <view class='order-content'>剩余积分：{{item.dq}}</view>
+              </view> 
+      </view>
+      <!-- 兑换详情 -->
+      <view wx:if='{{item.id==ids}}'>
+          <view class='flex-items-justify border-top'>
+                  <view class='section-width flex section-left'>
+                        <view class='order-content'>变更时间：{{item.time}}</view>
+                  </view> 
+                  <view class='section-width flex'>
+                        <view class='order-content'>变更原因：{{item.remark}}</view>
+                  </view> 
+          </view>
+          <view class='flex-items-justify'>
+                  <view class='section-width flex section-left'>
+                        <view class='order-content'>充值金额:{{item.cz}}元</view>
+                  </view> 
+                  <view class='section-width flex'>
+                        <view class='order-content'>赠送积分：{{item.zj}}</view>
+                  </view> 
+          </view>
+          <view class='flex-items-justify'>
+                  <view class='section-width flex section-left'>
+                        <view class='order-content'>原有积分:{{item.dq}}</view>
+                  </view> 
+                  <view class='section-width flex'>
+                        <view class='order-content'>剩余积分：{{item.yue}}</view>
+                  </view> 
+          </view>
+     
+   
+   
+  </view>
+  
+ </block>       
+   
+  </view>
+  <view class='annotation'>
+    注：因系统原因，查询当天结果可能存在延时
+  </view>
+</view>
+  

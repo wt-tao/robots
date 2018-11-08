@@ -1,0 +1,216 @@
+基本数据类型
+	js中有6种
+	特殊：
+	Null：空，表示不存在（值为小写null）
+		可以初始化
+	Undefined：未定义（默认值undefined）
+		
+	一般
+	Number:数值（具有线性规定）
+		细分为整型和浮点型
+		var int = 1    		//整型
+		var float = 1.0 	//浮点型（可以用科学计数法表示；eg：（var float = 1.2e3）==（var float=1.2*10*10*10）==(var float=1200)）
+								也可以用十六进制
+								var num = 0x1f4   
+								alert(num)			//500
+								也可以用八进制
+								var num = 0764   
+								alert(num)			//500
+		js中提供了大量数值运算函数
+		var a = Math.floor(20.5)   		//下舍入
+		var b = Math.round(20.5)		//四舍五入
+		alert(a)						//20
+		alert(b)						//21
+		toString()：可以转换为对应进制(2-36之间)的数值字符串，
+			var a = 32
+			document.writeln(a.toString(2))					//100000
+			document.writeln(a.toString(4))					//200
+			document.writeln(a.toString(16))				//20
+			document.writeln(a.toString(30))				//12
+			document.writeln(a.toString(32))				//10
+			
+			
+			document.writeln(32.toString(16))				//执行错误
+		
+	string：字符串
+		alert('字符串\n')					//	\n：换行
+		alert('字符串'.length)				//length：长度
+		
+	Boolean：布尔值（true||false）
+		undefined   null "" 0 NaN false   均为false
+		基本方法
+		boolean.toString()          	//将布尔值转换为字符串
+		boolean.valueOf()				//boolean对象的布尔值
+		强制转换为boolean类型
+		eg：alert（Boolean（0））		//false
+	object：对象，面向对象的基础
+	用typeof 检查数据类型
+	
+	
+	
+启动严格模式
+	用："usr strict"  放在首部（代码的首行，前面没有可执行的代码）
+	场景：全局模式（放在每一个script的第一行）
+		  局部模式（放在每一个方法函数的第一行）
+	执行限制：
+		声明变量必须显性声明 
+		静态绑定
+		禁止使用with语句  
+		创设eval作用域 不在指向window，而是自身的作用域
+			"usr strict"
+			var	 x = 2 
+			console.info(eval('var x = 5;x'))			//5
+			console.info(x)								//2
+		
+		增强的安全措施
+			禁止this关键字指向全局对象
+			eg：
+			function f(){
+				return !this
+			}		//返回false  因为this指向全局对象，!this就是false
+			
+			function f(){
+				"usr strict"
+				return !this
+			}		//返回true 因为在严格模式下，this的值就是undefined  所以!this就是false
+		
+		使用构造函数时，若忘了加new语句，this不在指向全局对象，而是报错
+			eg：
+				function f(){
+					"usr strict"
+					this.a = 1
+				}
+				f()					//报错，this未定义
+		
+		禁止在函数内部遍历调用栈
+			caller、callee和arguments的调用行为都被禁用
+			eg：
+				function f1(){
+						"usr strict"
+						f1.caller;				//报错
+						f1.arguments			//报错
+					}
+					f1()	
+			
+		禁止删除变量
+			严格模式下无法删除变量，只有configurable设置为true的对象属性，才能被删除
+				eg：
+				"usr strict"
+				var x;
+				delete x;										//语法错误
+				var o = Object.create(null,'x',{
+					value:1,
+					configurable:true
+				});
+				delete o.x										//删除成功
+			
+		显式报错
+			正常模式下，对一个对象的只读属性进行赋值，不会报错，只会默默失败，严格模式下，将报错
+				eg：
+					"usr strict"
+					var o = {}
+					Object.defineProperty(o,'v',{value:1,writable:false})
+					o.v = 2										//报错
+				
+			
+			严格模式下，对一个使用getter方法读取的属性进行赋值，会报错
+				eg：
+					"usr strict"
+					var o = {
+						get v() {return 1;}
+					}
+					o.v = 2										//报错
+			
+			
+			严格模式下，对禁止扩展的对象添加新属性，会报错
+				eg：
+					"usr strict"
+					var o = {}
+					Object.preventExtensions(o)
+					o.v = 1										//报错
+			
+			严格模式下，删除一个不可删除的属性，会报错
+				eg：
+					"usr strict"
+					delete Object.prototype;					//报错
+				
+			重名错误
+				eg：
+					"usr strict"
+					var o = {
+						p:1,
+						p:2
+					}											//语法错误
+					
+					"usr strict"
+					function f(a,a,b){							//语法错误
+						return;
+					}												
+			
+			禁止八进制表示法
+				eg：
+					"usr strict"
+					var n = 0100;								//语法报错
+			 
+		arguments对象的限制
+			不允许对arguments赋值
+			禁止arguments.callee
+			函数必须声明在底层
+				eg：
+					"usr strict"
+					if(true){
+						function f(){}							//语法报错
+					}	
+					for(var i = 0;i < 5;i++){
+						function f2(){}							//语法报错
+					}	
+					
+			保留字			
+				eg：
+					
+					function package(protected){				//语法报错
+							"usr strict"
+							var implements						//语法报错
+					}
+			
+			动态绑定
+				eg：
+					"usr strict"
+					function func(){
+						console.log(typeof this)
+					}
+					func.call('abcd')							//string
+					func.apply(1)								//number
+				eg：
+					"usr strict"
+					function func(){
+						console.log(this)
+					}
+					func.call(undefined)							//undefined
+					func.apply(null)								//null
+			
+			下例代码在非严格模式中输出都是window（或global）
+				eg：
+					"usr strict"
+					function func(){
+						console.log(this)
+					}
+					var f1 = func.bind(undefined)									
+					var f2 = func.bind(null)										
+					f1()														//null
+					f2()														//undefined
+						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					

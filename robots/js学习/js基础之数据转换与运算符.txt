@@ -1,0 +1,351 @@
+1、js（弱类型语言）：对数据类型没有严格限制，除了特殊情况，
+2、使用typeof检测数据类型  （针对简单数据类型）
+		eg：
+		alert（typeof 1）  //number  返回是小写
+		alert（typeof null）  //object
+		检测null时：
+			eg：
+				function type(o){       		//返回值类型数据的类型字符串
+					return (o === null )? "null" :(typeof o);
+ 					//如果是null值，则返回null，否则返回(typeof o)表达式
+				}
+3、使用constructor检测类型（针对复杂 类型）
+	为object的一个属性  返回的是一个构造函数
+	eg：
+		var o={};
+		var a=[];
+		alert(o.constructor == Object)         			//true
+		alert(o.constructor == Array)         			//true
+		
+		var value = 1;
+		alert(typeof value)								//typeof运算符返回的字符串
+		alert(typeof constructor)						//constructor属性返回的对象
+		
+	eg：
+		var value = undefined
+		alert（typeof value)							//undefined
+		alert(value && value.constructor)				//undefined
+		
+		var value = null
+		alert（typeof value)							//'object'
+		alert(value && value.constructor)				//null
+		
+		typeof返回的是一个字符串    constructor返回的是一个对象
+		
+4、封装类型检测方法：toString（）
+	eg：
+	function isArray(o){
+		return Object.prototype.toString.call（o） === '[object Array]'
+	}
+	alert(isArray(a))									//true 
+	
+	[object class]：对象  object:通用类型  大类  class:小类
+	
+	var o = function(){}
+	alert(o.toString())     										//function(){}
+	var o = {}
+	alert(o.toString())     										//[object Object]
+	var o = []
+	alert(o.toString())     										// 
+	
+	
+	var o = function(){}
+	var m = Object.prototype.toString;
+	alert(o.m())													//报错，不支持m的属性或方法  
+	
+	alert(m.call（o）);												//[object Function ]
+	
+	var o = []
+	var m = Object.prototype.toString;
+	alert(m.call（o）)												//[object Array ]
+	
+	
+	eg：
+	function typeOf(o){
+		var _toString = Object.prototype.toString;
+		//获取对象的tosSring（）方法引用
+		//列举基本数据类型和内置对象属性，可以进一步补充该数组的检测数据类型
+		var _type = {
+			'undefined' : 'undefined',
+			'number' : 'number',
+			'string' : 'string',
+			'boolean' : 'boolean',
+			'[object Function]' : 'function',
+			'[object RegExp]' : 'regexp',
+			'[object Array]' : 'array',
+			'[object Date]' : 'date',
+			'[object Error]' : 'error',
+		}
+		return _type[typeof o] || _type[_toString.call(o)] || (o ? 'object' :'null')
+		//通过把值转换为字符串，然后匹配返回字符串中是否包含特殊字符进行检测
+	}
+	var a = Math.abs;
+	alert(typeOf(a))													//'function'
+	
+5、转换为字符串
+	(1) Object.toString()  定义一个对象的字符串表示  通用
+	(2) a = new RegExp(/^\w$/)+'' 			//任何值后面加一个空字符串，即可转换为字符串
+
+	eg：
+	var a = 1+1+"a"
+	var b = 'a'+1+1
+	alert(a)					//2a
+	alert(b)					//a11	
+
+6、转换为数字模式
+	利用toString()转换  ()可跟进制
+	
+7、设置数字显示的小数位数
+	toFixed():为数字指定小数位数
+	eg： 
+	var a = 10
+	alert(a.toFixed(2))				//'10.00'
+	alert(a.toFixed(4))				//'10.0000'
+	
+	toExponential():把数字转换为科学计数法 保留指定数字小数位数
+	eg： 
+	var a = 123456789
+	alert(a.toExponential(2))				//'1.23e+8'
+	alert(a.toExponential(4))				//'1.2346e+8'
+
+	toPrecision():指定小数位数后有效位数
+	eg： 
+	var a = 123456789
+	alert(a.toPrecision(2))				//'1.2e+8'
+	alert(a.toPrecision(4))				//'1.235e+8'
+	
+8、转换为数字
+	parseInt
+	parseFloat    从左向右逐个转换
+	
+	1、使用parseInt
+	eg1:
+	alert(parseInt('123abc'))				//123
+	alert(parseInt('1.73'))					//1
+	alert(parseInt('.123'))					//NaN
+	
+	eg2:
+	var d = '010'
+	var e = '0x10'
+	alert(parseInt(d))						//返回十进制数字8
+	alert(parseInt(e))						//返回十六进制数字16
+	
+	var a = '123abc'
+	alert(parseInt(a,16))						//返回十进制数字1194684
+	
+	
+	alert(parseInt('10',2))						//把二进制的10 转换为十进制
+	
+	2、parseFloat基本于parseInt一样
+	唯一不同
+	
+	3、使用乘号运算符
+	var a = 1
+	var b = '1'
+	alert（a+b）						//11
+	
+	任何字符串数字乘1  即可转为int类型
+	var a = 1
+	var b = '1'
+	alert（a+(b*1)）						//2
+	
+	
+	alert(parseInt('010'))						//10
+	
+9、转换为布尔值
+	（1）双重逻辑非，强制转换
+	eg：
+	var a = !!0           //返回false
+	（2）使用Boolean（）构造函数转换
+	eg：
+	var a = 0;
+	var b = 1
+	a = new Boolean(a)    //false
+	b = new Boolean(b)    //true
+	
+	eg：
+	var a = 0;
+	var b = !!a
+	var c = new Boolean(a)
+	alert(typeof b)    //boolean
+	alert(typeof c)    //object
+	
+10、转换为对象（拆箱和装箱）
+	 eg：装箱
+	 var a = 1;
+	 var b = new Number(1);	//通过number构造函数装箱后赋值
+	 alert(typeof a)  		//返回number 说明其值为值类型的数值
+	 alert(typeof b)  		//返回object 说明其值为引用类型的对象
+	 
+	 eg：拆箱
+	 var a = new Number(1);
+	 var b = new String('1');
+	 alert(typeof a)  		//返回object类型
+	 alert(typeof b)  		//返回object类型
+	 alert(typeof a.valueOf())  		//返回number数值类型
+	 alert(typeof b.valueOf())  		//返回string字符串类型
+	 alert(typeof a.toString())  		//返回string字符串类型
+	 alert(typeof b.toString())  		//返回string字符串类型
+	 
+11、对象转换为值
+		对象(转换布尔值)在逻辑环境中都为true
+		不存在则为null   false
+		valueOf()
+		空数组转换为数字为0 转布尔值为false
+		eg：
+		var a = new Boolean(true)   //将true封装为对象
+		alert(a.valueOf())			//测试该对象值为false
+		alert（typeof(a.valueOf()))	//	测试类型为boolean	
+		a = a - 0					//投放到数值运算环境中
+		alert(a);					//1
+		alert（typeof a)			// number
+		
+		//首先，直接使用valueOf()取值， 没有成功
+		a = a.valueOf()				//取出对象自身值
+		alert(a)					//true
+		alert（typeof a)			//boolean
+		
+		//然后，把对象自身值转换为字符串，再次尝试，没有成功
+		a = a.valueOf()				//取出对象自身值
+		a = a.toString（）			//转换为字符串  返回‘true’
+		a = parseFloat(a)			//转换为数值
+		alert(a)					//NaN
+		alert（typeof a)			//number
+		
+		//最后，尝试强制转换，成功
+		a = a.valueOf()				//取出对象自身值
+		a = Number(a)				//强制转换
+		alert(a);					//1
+		
+12、强制转换
+	var a = String(true)			//字符串‘true’
+	var a = Number(true)			//1
+	var a = Number('a')			//NaN
+	var a = Boolean(1)			//true
+	var a = Boolean('')			//false
+	
+	var a = parseInt(true)			//NaN
+	
+	var a = Number('123abc')			//NaN
+	var a = parseInt('123abc')			//123
+	
+13、加法运算
+	NaN与任何运算数相加都为NaN
+	infinity(无穷大)与任何数相加都为infinity
+	正负(infinity)相加为NaN
+	数字与字符串相加为字符串  1+‘1’ ==‘11’
+	加空字符串，前面相加成字符串，中间加为拼接
+	3.0+‘’+4.3==34.3  .0为浮点型，自动省略
+	
+14、减法运算
+	alert(2-'a')		//NaN
+	alert(2-'1')		//1(与加号不同，将字符串转为数字运算)
+	
+15、乘法运算
+	NaN 与infinity与加法减法一样
+	infinity*0  == NaN
+	
+16、除法运算
+	NaN 与infinity与乘法一样
+	infinity/infinity   //NaN
+	n/0(-0)  		//-infinity（尽量避免）
+	0/infinity      //infinity(由符号决定)
+	
+17、余数运算(模运算)
+	返回的是浮点数
+	alert(infinity & 5)		//NaN
+	alert(infinity & infinity)		//NaN
+	alert(5 & infinity)		//5
+	alert(0 & infinity)		//0
+	alert(0 & 5)		//0
+	alert(5 & 0)		//NaN
+	lert( infinity & 0)		//NaN
+	
+18、取反运算（一元运算符）
+	alert(-5)				//-5
+	alert(-'5')				//-5  先转换为数值类型在取反
+	alert(-'a')				//-NaN
+	alert(-NaN)				//NaN
+	alert(-infinity)		//-infinity
+	alert(-(-infinity))		//infinity
+	
+19、递增和递减运算符（一元运算符） 只能作用于变量，。不能作用固定值
+	alert(4++)				//错误
+	var n=4
+	alert(n++)				//4 
+	alert(++n)				//5
+	
+20、逻辑与或非运算  （注意优先级） 
+	与：	有false  返回为false
+	或：	有true	 返回true	  
+	非：	逻辑取反（优先级高于与、或）  会转换数据类型为boolean
+	
+21、大小比较
+	< 、<=、>、>=
+	alert('a' > 'b')   //false   a编码为61   b为62
+	多个字母比较 依次比较
+	
+22、包含检查   
+	in  检查一个属性是否存在 （检查左侧 是否为右侧的成员  右侧必须为数组或对象） 字符串 in  对象
+		eg:  
+		var o = { a:1,b:function(){}}
+		alert('a' in o)			//true
+		alert('c' in o)			//false
+		alert('valueOf' in o)			//true
+		alert('constructor' in o)			//true
+		valueOf与constructor继承js为所有object对象定义的方法（属性）
+	instanceof  检查对象类型   对象 instanceof  构造函数
+		左侧必须为对象  右侧必须为类型  或函数名 不是则返回false
+		var a = new Array()
+		alert(a instanceof Array)		//true
+		alert(a instanceof Object)		//true
+		alert(a instanceof Function)		//false
+		
+23、等值检查（任意）
+		==
+			alert('1' == 1)				//true   字符串转换为数字
+			alert(true == 1)				//true		true转换为1
+			alert(false == 0)				//true		false转换为0
+			alert(null == 0)				//false
+			alert(undefined == 0)				//false
+			alert(undefined == null)				//true
+			alert(NaN == 'NaN')				//false
+			alert(NaN == 1)				//false
+			alert(NaN == NaN)				//false
+			alert(NaN != NaN)				//true
+		!=
+		===（类型，内容全都判断，若有一点不同则返回false）
+		var a = {}
+		var b = {}
+		alert(a === b)			//false  引用的不同
+		
+		var a = {}
+		var b = a
+		alert(a === b)			//true  
+		
+		对于引用类型的值比较，主要比较的是引用的地址是否相同 而不是比较内容
+		对于值类型而言，只要类型相同，值相等，就应完全相等，这里则不用考虑运算数的表达式数据类型的变化，
+		也不用考虑变量的引用地址
+		!==
+
+24、赋值运算（左侧必须为变量、对象的属性、数组的元素=任意） '='
+
+25、new运算符（创建新对象即对象实例化） new constructor(参数)   constructor：函数
+	eg：
+	构造函数：必须实例化
+	var a = function(){
+		this.x = 1;
+		this.y = 2;
+	}
+	var b = a;
+	alert(b.x)			//undefined  未实例化
+	var b = new a()		
+	alert(b.x)			//1
+	
+	eg：
+	var a = {
+		x ； 1;
+		y ； 2;
+	}
+	var b = a;			//直接克隆对象数据结构
+	alert(b.x)			//1   调用对象的成员

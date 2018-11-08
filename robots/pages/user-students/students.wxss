@@ -1,0 +1,146 @@
+/* pages/user-students/students.wxss */
+page{
+  background: #f0f0f0
+}
+.section1{
+  width:100%;
+  background: #fff;
+}
+.section1>view{
+  width:94%;
+  margin-left:3%;
+}
+.section1-line{
+  align-items: center;
+  justify-content: space-between;
+}
+.filter{
+  align-items: center;
+  width:20%;
+  height:50rpx;
+  line-height: 50rpx;
+}
+.filter-img{
+  width:35%;
+  height:30rpx;
+}
+.filter-letter{
+  font-size:12pt;
+  height:50rpx;
+  line-height: 50rpx;
+}
+.header-info{
+   width:80%;
+   font-size:10pt;
+   text-align: right;
+}
+
+/* 查询 */
+.select-date{
+  width:80%;
+  align-items: center;
+}
+.select-date>view{
+  width:60%;
+}
+.date{
+  align-items: center;
+  width:35%;
+  height:45rpx;
+  line-height:45rpx;
+  background: #f0f0f0;
+  justify-content:flex-end;
+  
+}
+.date-img{
+    width:25%;
+  height:18rpx;
+  margin-left:1%;
+}
+.date-letter{
+  font-size:10pt;
+  height:45rpx;
+  line-height: 45rpx;
+  
+}
+.btn{
+  font-size:11pt;
+  height:40rpx;
+  line-height:40rpx;
+  /* color:#555; */
+  font-weight: bold;
+  background:linear-gradient(to bottom,#82eed7,#14b48e);
+}
+/* 日期 */
+.section1-line3{
+  align-items: center;
+  justify-content: space-between;
+  padding:35rpx 0;
+}
+.label{
+  font-size:10pt;
+  padding:7rpx 12rpx;
+  color:#18bc9a;
+  border:1px solid #18bc9a;
+  border-radius:4rpx;
+}
+
+/* 佣金 */
+.salary{
+  font-weight: bold;
+}
+.salary-num{
+  color:#d96b6a;
+  font-size:13pt;
+}
+.getsalary{
+    height:50rpx;
+  line-height:50rpx;
+  margin-bottom:20rpx;
+}
+
+/* 设备地被详情 */
+/* 进行中 */
+.section{
+  /* background:#fff; */
+  margin-bottom:10rpx;
+}
+.line-data{
+  width:100%;
+  padding-left:3%;
+  padding-top:10rpx;
+  padding-bottom:10rpx;
+  /* justify-content:space-between; */
+}
+.line-left{
+  font-size:9pt;
+  width:38%;
+  height:120rpx;
+}
+.line-right{
+  font-size:9pt;
+  height:120rpx;
+}
+.line-right-start-time{
+  font-size:11.5pt;
+  /* font-weight:bold; */
+}
+.line-right-end-time{
+  font-size:11.5pt;
+  /* font-weight:bold; */
+  /* padding-top:10rpx; */
+}
+
+/* 学员 */
+.line-img{
+  font-size:9pt;
+  width:25%;
+  height:120rpx;
+}
+.option-icon {
+  width:125rpx;
+  height:120rpx;
+  margin-right: 24rpx;
+  border-radius: 50%;
+  /* border:1px solid #f0f0f0; */
+}

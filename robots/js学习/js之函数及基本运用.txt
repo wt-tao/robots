@@ -1,0 +1,487 @@
+1、声明函数(function)
+	function 函数名（[args]）{
+		函数语句
+	}
+	必须有函数名，大括号小括号
+	有空函数和匿名空函数
+	调用的直接写函数名()
+	
+2、构造函数（特殊函数：类型函数）
+	使用Function()构造函数可以不指定任何参数
+		var f= new Function()  //定义空函数
+3、函数直接量（匿名函数）
+	eg:
+	function(a,b){			//函数直接量
+		return a + b
+	}
+	
+	匿名函数就是一个表达式，即函数表达式，而不是函数结构的语句中把
+	匿名函数作为一个值赋值给变量f
+	var f=function(a,b){		//把函数作为一个值赋值给变量f	
+		return a + b
+	}
+	alert(f(1,2))  //3
+	
+	匿名函数作为值，可以参与更复杂的表达式运算
+	//把函数作为一个运算元，利用函数调用运算符（()）进行调用
+	alert((function(a,b){
+		return a + b
+	})(1,2)
+	)		//3
+	
+4、定义函数嵌套
+	function f(x,y){	
+			function e(a,b){   函数e只能在函数体f内访问，f函数体外无法访问
+				return a * b
+			}
+			return x + y
+	}
+	eg:
+	function f(x,y){	
+			function e(a,b){   
+				return a * b
+			}
+			return e(3,6) + y;  //return表示函数结束
+			alert(e(3,6))		//无效
+	}
+	alert(f(3,6)) 	//调用外层函数
+	
+5、定义函数的方法
+	1、使用function语句			具有函数作用域，效率最高
+	2、使用Function()构造函数	顶级函数，具有顶级作用域  效率最低
+	3、使用函数直接量			具有函数作用域
+		
+	eg：
+	var n = 1		//全局变量，作用域当前文档
+	function f(){
+		var n = 2;	//局部变量，仅限函数体内
+		function e(){	//使用function语句定义函数结构
+			return n;		//检测变量n返回值
+		}
+		return e;	//返回函数结构
+	}
+	alert(f()());	//2  调用函数f的返回函数e
+	
+	
+	如果使用函数直接量定义函数e ，当调用该返回函数时。为2，
+		说明函数直接量定义的函数拥有局部作用域
+	
+	eg：
+	var n = 1		//全局变量，作用域当前文档
+	function f(){
+		var n = 2;	//局部变量，仅限函数体内
+	var e = function(){	//使用函数直接量定义函数结构
+			return n;		//检测变量n返回值
+		}
+		return e;	//返回函数结构
+	}
+	alert(f()());	//2  调用函数f的返回函数e
+	
+	
+	如果使用Function()构造函数定义函数e ，则调用函数时，返回值不为2
+	因为Function()构造函数定义的函数作用域需要动态确定，而不是在定义函数内，所以具有全局作用域
+	eg：
+	var n = 1		//全局变量，作用域当前文档
+	function f(){
+		var n = 2;	//局部变量，仅限函数体内
+	var e = new function('return n;')	
+			//使用Function()构造函数定义的函数结构体
+			//检测变量n返回值
+		
+		return e;	//返回函数结构
+	}
+	alert(f()());	//1  调用函数f的返回函数e
+	
+	
+6、函数返回值（默认undefined）
+	可以使用return  返回，一旦使用则函数停止
+	return  返回的类型可以不同
+	
+7、调用函数（默认状态不执行）
+	eg:
+	function f(x,y){
+		return x * y
+	}
+	alert(f(5,6))	//30
+	
+	//连续调用
+	function f(x,y){
+		return function(){
+			return x * y
+		}		
+	}
+	alert(f(5,6)())	//30
+	
+8、函数作用域
+	全局作用域  
+	局部作用域（函数作用域，对内可见，对外不可见）
+	
+	从内到外逐层访问
+	
+9、定义函数参数
+	形参:声明函数时的一个参数变量，函数的私有变量（对内可见，对外不可见）数量类型无限制
+	实参：调用函数时传的值
+	
+	function f(x,y){     //x,y形参
+		return function(){
+			return x * y
+		}		
+	}
+	alert(f(5,6)())	//30  5,6为实参
+		如果实参与形参重名，则实参会覆盖形参
+	eg：
+	function f(a){
+		var a = 0;
+		return a;
+	}
+	alert(f(5))  //5
+	
+10、使用arguments对象
+	参数集合（实参）：伪类数组
+	function f(){	//定义没有形参的函数
+		for(var i = 0; i < arguments.length;i++){
+			//循环读取函数的arguments对象
+			alert(arguments[i]);//显示指定下标的实参的值
+		} 
+	}
+	f(3,3,6)		//逐个显示每个传递的实参
+	函数没有定义形参，但是在函数体内通过arguments来传递实参
+	实参都存放在arguments中
+	
+	function f(){	//定义没有形参的函数
+		for(var i = 0; i < arguments.length;i++){
+			//循环读取函数的arguments对象
+			arguments[i] = i	//修改每个实参的值
+			alert(arguments[i]);//显示指定下标的实参的值
+		} 
+	}
+	f(3,3,6)		//返回1,2,3 而不是3,3,6
+	也可以使用arguments.length来截断实参
+	
+11、使用callee回调函数
+	为arguments的一个属性
+	
+	function f(x,y,z){
+		var a = arguments.length	//	获取函数实参的个数
+		var b = arguments.callee.length	//	获取函数形参的个数arguments.callee==函数名 这样可以调用匿名函数的形参
+		if(a != b){
+			throw new Error('传递的参数不匹配')
+		}else{					//若形参和实参数目相同，则返回他们的和
+			return x + y + z;
+		}
+	}
+	alert(f(3,4,5))		//12
+
+12、应用arguments对象
+	eg：
+	function avg(){
+		var num = 0,l = 0;
+		for(var i = 0;i < arguments.length;i++){	//利用arguments.length来访问所以实参
+			if(typeof arguments[i] != 'number')		//判断实参类型
+				continue;							//不是数字则跳过
+			num += arguments[i];			//是数字则加起来
+			l++;							//计算个数
+		}	
+		num /= l;							//求平均数
+		return num
+	}
+	alert(avg(1,2,3,4))		//2
+	alert(avg(1,2,'3',4))	//2
+
+
+13、获取形参个数
+	arguments.length：可获取实参个数
+	function.length:	可获取形参个数
+	eg：
+	function f(x,y){}
+	alert(f.length)	//2
+	
+	arguments对象的length属性仅能在函数体内使用
+	eg：
+	function check(a){		//定义检测函数实参与形参是否一致的方法
+		if(a.length != a.callee.length)
+		//若实参与形参发length属性值不同，则抛出错误
+		throw new Error('参数不一致')
+	}
+	function f(a,b,c,d){	//定义普通应用函数
+		check(arguments);		//调用函数check
+		return(a + b + c + d) / 3		//返回函数值
+	}  
+	alert(f(3,4))		//抛出异常，调用函数f
+
+14、自定义属性
+	静态属性和静态方法
+	可以在函数外也可以在函数内定义
+	eg：
+	function f(){
+		f.x=1
+	}
+	f.y=2
+	
+	函数外定义的属性可以随时访问，但是在函数内定义的属性只有在函数内被访问
+	eg：
+		function f(){
+			f.x=1；
+			alert(f.x)	//1
+			alert(f.y)	//2
+		}
+		f.y=2
+		alert(f.x)	//undefined
+		alert(f.y)	//2
+		f();	//只有函数调用后才能访问函数体内的
+		alert(f.x)	//1
+
+	设计临时变量时，要注意变量递增等改变临时变量的情况
+
+15、使用call()和apply()动态调用函数
+	function.apply(this对象 数组)
+	function.apply(this对象 参数列表)
+	eg：
+	function f(x,y){
+		return x+y
+	}
+	function o(a,b){		//定义函数结构的伪对象
+		return a*b
+	}
+	alert(f.call(o,3,4))	//7
+	== f(3,4)
+	
+	alert(f.apply(o,[3,4]))	//7
+
+	eg：
+	function max(){
+		var m = Number.NEGATIVE_INFINITY;
+		//声明一个负无穷大的数组 
+		for(var i = 0;i < arguments.length;i++){
+			//遍历函数所以实参
+			if(arguments[i]>m)		//如果实参值大于这个数值
+			m = arguments[i]		//则赋值给m
+		}
+		return m;		//返回最大值
+	}
+	var a = [23,45,2,46,62,45,56,63]
+	//声明并初始化数组
+	var m = max.apply(Object,a);
+	//把函数max绑定为Object对象的方法，并动态调用
+	alert(m)		//63
+
+	call()和apply()方法能够动态改变函数内this指代的对象是非常有用的
+	eg:
+	var x = 'o'		//定义全局变量x 并初始化
+	function a(){	//定义函数类结构a
+		this.x='a'	//定义函数内部量x，初始化
+	}
+	function b(){	//定义函数类结构b
+		this.x='b'	//定义函数内部量x，初始化
+	}
+	function c(){	//定义普通函数，提示变量x的值
+		alert(x)
+	}
+	function f(){	//定义普通函数，提示当前指针所指的x的值
+		alert(this.x)
+	}
+	f();//返回o;即全局变量x的值，this此时指向window对象
+	
+	f.call(window) //返回o;即全局变量x的值，this此时指向window对象
+	
+	f.call(new a()) //返回a;即函数a内部x的值，this此时指向函数a对
+
+	f.call(new b()) //返回b;即函数b内部x的值，this此时指向函数b
+
+16、使用bind()：把一个函数绑定到指定对象上，从而改变当前函数的上下文环境
+	function.bind(指定对象[多个参数])  返回绑定的新函数
+	eg：
+	var checkNumberRange = function (value){
+		if(typeof !== 'number')
+			return false
+		else
+			return value >= this.minmum && value <= this.maxmum
+	}
+	var range = {minmum:10,maxmum:20};
+	var boundCheckNumberRange = checkNumberRange.bind(range);
+	var result = boundCheckNumberRange(12)
+	documnet.write(result)		//true
+17、this使用
+	异步调用，一般指向全局作用域
+	动态调用，则会指向具体的
+		var o ={
+			name:'对象o',
+			f:function(){
+				return this
+			}
+		}
+	o.o1={
+		name:'对象o1',
+		me:o.f		//引用对象o的方法f
+	}
+	var who = o.o1.me()
+	alert(who.name)		//对象o1  说明当前this代表对象o1
+
+	o.o1={
+		name:'对象o1',
+		me:o.f		//引用对象o的方法f
+	}
+	var who = o.o1.me
+	alert(who.name)		//对象o  说明当前this代表对象o
+
+	function f(){
+		alert(this.x+this.y)
+	}
+	var o={
+		x:1,
+		y:2
+	}
+	f.call(0)		//3
+
+	
+	eg:
+	function Base(){	//基类
+		this.m=function(){		//基类方法m
+			return 'Base'
+		};
+		this.a =this.m();
+		this.b =this.m;
+		this.c =function(){
+			//基类的方法c()，以闭包结构用当前作用域中m（）方法
+			return this.m();
+		}
+	}
+	
+	function F(){		//子类
+		this.m = function(){	//子类方法m
+			return 'F'
+		}
+	}
+	F.prototype =new Base()	//基础基类
+	var f =new F()		//实例化子类
+	alert(f.a)			//'Base' ,说明this.m()中this指向F的原型对象
+	alert(f.b())		//'Base' ,说明this.m()中this指向F的原型对象
+	alert(f.c())		//F
+	
+	
+18、this安全策略
+	使用中坚持的两个基本原则
+		1、确保同一作用域中操作包含this的方法或函数，避免把包含this的全局函数或方法动态用在局部作用域中
+		2、避免在不同作用域之间相互引用包含this的方法或属性
+	
+	eg：
+	<input type='button' value='按钮1' onclick='f()'>
+	<input type='button' value='按钮2' onclick='f()'>
+	<input type='button' value='按钮3' onclick='f()'>
+	改：
+	<input type='button' value='按钮1' onclick='f(this)'>
+	<input type='button' value='按钮2' onclick='f(this)'>
+	<input type='button' value='按钮3' onclick='f(this)'>
+	<script language="javascript" type="text/javascript">
+		function f(){
+			alert(this.value)			//undefined,应将this作为动态参数传递
+		}
+		改：
+		function f(_this){
+			alert(_this.value)			//undefined,应将this作为动态参数传递
+		}
+	</script>
+	
+19、应用this
+	
+		function f(){
+			this.x=function(x){
+				return x
+			}
+		}
+		f()
+		alert(f.x(4))	//对象不支持x的属性或方法
+		alert(x(4))		//4
+		alert(window(4))	//4
+	
+		f = new f()
+		alert(window(4))	//对象不支持x的属性或方法
+		alert(f.x(4))	//4
+	
+	
+	eg:
+	var x = 1 	//声明变量x为1
+		function f(){
+			this.x = 2;		//声明当前对象属性x为2
+		}
+		alert(x)	//1
+		
+		f()		//先调用函数
+		alert(x)	//2
+		//在全局作用域中，所以变量和函数 调用对象都是window
+		
+		window.f()		//先调用函数
+		alert(window.x)	//2
+		
+20、函数的调用模式
+	调用方式不同，指向也不同
+	1、方法调用模式
+		var obj ={
+			value:0,
+			increment:function(inc){
+				this.value += typeof inc === 'number' ? inc : 1
+			}
+		}
+		obj.increment();
+		documnet.writeln(obj.value);	//1
+		obj.increment(2);
+		documnet.writeln(obj.value);	//3
+		
+	2、函数调用模式
+		var sum = add(3,4)
+		var obj ={
+			value:1,
+			doub:function(inc){
+			var that=this
+				var helper = function(){
+					that.value = that.value*2
+				};
+				helper();
+			}
+		}
+		obj.increment();
+		documnet.writeln(obj.value);	//2
+	
+	3、构造器调用模式
+	var F=function(string){
+		this.status =string
+	};
+	F.prototype.get = function(){
+		return this.status
+	};
+	var f=new F('new object');
+	documnet.write(f.get())	//new object
+	
+	4、apply调用模式
+	var array=[5,4]
+	var add =function(){
+		var i,sum=0;
+		for(i=0;i<arguments.length;i +=1){
+			sum += arguments[i]
+		}
+		return sum
+		var sum =add.apply({},array);	//9
+	}
+		
+21、函数的标识符
+	优先级：
+		function(){
+			this---->
+			局部变量---->
+			形参---->
+			arguments---->
+			函数名
+		}
+		eg：
+		function f(){
+			alert(f)  //提示函数结构
+		}
+		//调用函数 返回f结构的字符串，等于f.toString()
+		f()
+		
+		如果在函数f中电影形参f。则同名情况下参数变量的优先权会大于函数
+		function f(){
+			alert(f)  //提示标识符f的值
+		}
+		//调用函数 返回true而不是f结构的字符串
+		f()

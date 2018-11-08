@@ -1,0 +1,86 @@
+/* pages/user-info/static-info/static.wxss */
+/* pages/orders/orders.wxss */
+page{
+  background:#f0f0f0;
+}
+.swiper-tab{
+  width: 100%; 
+  text-align: center; 
+  line-height: 80rpx;
+  border-top:10rpx solid #f6f6f6;
+}
+.swiper-tab-list{
+  font-size: 30rpx; 
+  display: inline-block; 
+  font-weight:bold;
+  width: 50%; 
+  color: #333; 
+  background:#fff;
+  border-bottom: 7rpx solid #fff;
+}
+.on{
+  color: #18bc9a; 
+  border-bottom: 7rpx solid #18bc9a;
+}
+.swiper-box{ 
+  display: block;
+  height: 1800rpx;
+  width: 100%;
+  overflow: hidden;
+  position:relative;
+ }
+
+
+/* 进行中 */
+.section{
+  background:#fff;
+  margin-bottom:10rpx;
+  letter-spacing:3rpx;
+}
+.section>view{
+  width:100%;
+}
+
+
+/* 已结束 */
+.section-width{
+  width:50%;
+  padding-top:15rpx;
+  padding-bottom:15rpx;
+}
+.section-left{
+  padding-left:10rpx;
+  width:70%;
+}
+.select-img{
+ width:8%;
+  height:35rpx;
+}
+.select-color{
+  color:#459aea;
+  height:35rpx;
+  line-height:35rpx;
+  font-size:10pt;
+  padding-left:8rpx;
+}
+
+.order-date{
+  color:#d0d2d4;
+  height:25rpx;
+  line-height:25rpx;
+  font-size:9pt;
+  padding-left:8rpx;
+}
+.order-content{
+  height:20rpx;
+  line-height:20rpx;
+  font-size:11.5pt;
+  padding-left:8rpx;
+  width:100%;
+}
+.border-top{
+  border-top:1px solid #f0f0f0;
+}
+.justify{
+  justify-content: space-between;
+}

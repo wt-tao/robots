@@ -1,0 +1,32 @@
+<!--pages/give-advices/advices.wxml-->
+<view class='faults'>
+        <view class='faults-details'>
+                     <textarea class='faults-content' type='text'  cols="10" rows="5" placeholder='请输入您的意见或问题' placeholder-class='placeholder1' bindinput='text' maxlength='200'>
+                     </textarea>
+                     <view class='flex faults-footer'>
+                        <image src='' class='section-img1'></image>
+                        <view class='letters-num'>{{num}}/200</view>
+                      </view>
+        </view>
+
+</view> 
+        <!-- 提交按钮 -->
+        <view class='btn-control'>
+              <button class='btn' bindtap='showDialogBtn1'>提 交</button>
+        </view>
+
+
+        <view class="modal-mask" bindtap="hideModal1" catchtouchmove="preventTouchMove" wx:if="{{showModal1}}">
+        </view>
+        <view class="modal-dialog" wx:if="{{showModal1}}">
+              <view class="modal-title"></view>
+              <view class="modal-content">
+                  <view class='flex modal-content-line'>
+                        <view class='modal-content-title'>感谢您的宝贵意见，您的支持将是我们前进的动力！</view>
+                  </view>
+              </view>
+              <view class="modal-footer">
+                <button class="btn-width" bindtap="onConfirm1" data-status="">确定</button>
+              </view>
+      </view>
+

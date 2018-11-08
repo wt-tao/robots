@@ -1,0 +1,28 @@
+<!--pages/contact-service/contact-service.wxml-->
+<view>
+        <!-- 拨打电话 -->
+        <view class='btn-control'>
+              <view class='phone-num'>123-456-789</view>
+              <button class='btn' bindtap='showDialogBtn1' id='123-456-789'>拨打电话</button>
+              <view class='phone-num text-left'>
+                        <text class='footer-info'>注：周一、周五 上午9:00-12:00 下午14:00-18:00</text>
+              </view>
+              
+        </view>
+        
+</view> 
+
+<view class="modal-mask" bindtap="hideModal1" catchtouchmove="preventTouchMove" wx:if="{{showModal1}}">
+        </view>
+        <view class="modal-dialog" wx:if="{{showModal1}}">
+              <view class="modal-title"></view>
+              <view class="modal-content">
+                  <view class='flex modal-content-line'>
+                        <view class='modal-content-title'>温馨提示：将转至通讯录，确定要拨打电话吗？</view>
+                  </view>
+              </view>
+              <view class="modal-footer">
+                <button class="btn-width" bindtap="onConfirm1" data-status="">确定</button>
+                <button class="btn-width" bindtap="onCancel1" data-status="">取消</button>
+              </view>
+      </view>

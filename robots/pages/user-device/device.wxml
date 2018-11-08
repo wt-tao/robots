@@ -1,0 +1,100 @@
+<!--pages/user-device/device.wxml-->
+<view>
+      <view class='section1'>
+            <view class='flex section1-line'>
+                  <view class='flex filter'>
+                        <image src='/images/filter.png' class='filter-img'></image>
+                        <view class='filter-letter'>筛选</view>
+                  </view>
+                  <view class='header-info'>注：因系统原因，查询当天结果可能存在延时。
+                  </view>
+            </view> 
+            <view class='flex section1-line'>
+                  <view class='flex  select-date'>
+                        <view class='flex'>
+                              <view class='flex date'>
+                                  <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                                    <view class='date-letter'>{{array[index]}} </view>
+                                  </picker>
+                                    
+                                    <image src='/images/down-jiantou.png' class='date-img'></image>
+                              </view>-
+                              <view class='flex date'>
+                                 <picker bindchange="bindPickerChange1" value="{{index1}}" range="{{array1}}">
+                                    <view class='date-letter'>{{array1[index1]}} </view>
+                                  </picker>
+                                    <image src='/images/down-jiantou.png' class='date-img'></image>
+                              </view>-
+                              <view class='flex date'>
+                                  <picker bindchange="bindPickerChange2" value="{{index2}}" range="{{array2}}">
+                                    <view class='date-letter'>{{array2[index2]}} </view>
+                                  </picker>
+                                    <image src='/images/down-jiantou.png' class='date-img'></image>
+                              </view>
+                        </view>至
+                       <view class='flex'>
+                              <view class='flex date'>
+                                    <picker bindchange="bindPickerChange3" value="{{index3}}" range="{{array3}}">
+                                    <view class='date-letter'>{{array3[index3]}} </view>
+                                  </picker>
+                                    <image src='/images/down-jiantou.png' class='date-img'></image>
+                              </view>-
+                              <view class='flex date'>
+                                    <picker bindchange="bindPickerChange4" value="{{index4}}" range="{{array4}}">
+                                    <view class='date-letter'>{{array4[index4]}} </view>
+                                  </picker>
+                                    <image src='/images/down-jiantou.png' class='date-img'></image>
+                              </view>-
+                              <view class='flex date'>
+                                    <picker bindchange="bindPickerChange5" value="{{index5}}" range="{{array5}}">
+                                    <view class='date-letter'>{{array5[index5]}} </view>
+                                  </picker>>
+                                    <image src='/images/down-jiantou.png' class='date-img'></image>
+                              </view>
+                        </view>
+                  </view>
+                  <view>
+                        <button class='btn' bindtap='secb' data-startTime='{{array[index]}}-{{array1[index1]}} -{{array2[index2]}}' data-endTime='{{array3[index3]}}-{{array4[index4]}}-{{array45[index5]}}'>查询</button>
+                  </view> 
+            </view> 
+             <view class='flex section1-line3'>
+                  <label class='label {{item.id==ids?"on":""}}'  wx:for='{{yue}}' bindtap='yues' id='{{item.id}}'>{{item.text}}</label>
+                  <!-- <label class='label'>二个月内</label>
+                  <label class='label'>三个月内</label>
+                  <label class='label'>六个月内</label>
+                  <label class='label'>一年内</label> -->
+            </view> 
+            <view class='flex section1-line'>
+                  <view class='flex  select-date' style='width:60%;margin-bottom:20rpx;'>
+                      <view class='salary'>我的佣金： <text class='salary-num'>{{datas}}</text>元</view>
+                  </view>
+                  <view style='width:20%;'>
+                        <navigator url='/pages/user-device/get-salary/get-salary?money={{datas}}'>
+                              <button class='btn getsalary'>提 现</button>
+                        </navigator>
+                        
+                  </view> 
+            </view> 
+      </view>   
+  <view class='section'>
+      <view class='line-data flex'>
+            <view class='' style='font-size:9pt;'>当前设备：{{num}}台</view>
+           
+      </view>
+      <view class='line-data flex' style='background:#fff;color:#9f9f9f;border-top:1px solid #b3b3b3;' wx:for='{{data}}'>
+            <view class='line-left'>
+                <view style='padding-top:8rpx;'>当前设备编号：{{item.deviceCode}}（正常）</view>
+                <view style='padding-top:8rpx;'>加入时间：{{item.createtime}}</view>
+                <view style='padding-top:8rpx;'>已用时长：{{item.time}}分钟</view>
+            </view>
+            <view class='line-right'>
+                <view class='line-right-start-time' style='padding:8rpx 0 18rpx 0;'>收入金额:<text decode='true' style='color:#5c5c5c;'>{{item.amount}}元</text>
+                </view>
+                <view class='line-right-end-time' style='padding:12rpx 0 0 0;'>我的佣金:<text decode='true' style='color:#5c5c5c;'>{{item.commission}}元</text>
+                </view>
+            </view>
+      </view>
+   
+      
+  </view>
+</view>

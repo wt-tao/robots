@@ -1,0 +1,42 @@
+<!--pages/user-students/get-coupon/get-coupon.wxml-->
+<view class='container'>
+      <view class='flex total-control1'>
+        <view class='bank-title'>到账银行</view>
+        <view class='flex bank-title'>
+        <image class='section-img'  src='/images/bank.png'></image>
+        工商银行(1234)</view>
+      </view> 
+      <view class='flex total-control'>
+                  <view>
+                        <text class='price'>兑换金额</text> 
+                  </view>
+        </view>
+      <view class='flex total-control'>
+                  <view class='flex money'>
+                        <text class='price money-num'>￥</text> 
+                        <input class='monye-input' bindinput='jif'></input>
+                  </view>
+                 
+        </view>
+      <view class='flex total-control padding-top'>
+                  <view>
+                        <text class='price'>当前积分余额：{{jifen}}</text> 
+                  </view>
+                 
+                 <text class='free-rule flex' decode='true' bindtap='alld'>全部兑换</text>
+      </view>
+      <!-- 确认按钮 -->
+        <view class='btn-control'>
+              <button class='btn' bindtap="showDialogBtn1">确认</button>
+        </view>
+
+</view>
+
+
+<view class='flex total-control footer'>
+                  <view>
+                        <text class='price'>注：提现在两小时内到账</text> 
+                  </view>
+                 
+                 <text class='free-rule flex' decode='true' bindtap='toSalaryRecord'>兑换记录</text>
+</view>
